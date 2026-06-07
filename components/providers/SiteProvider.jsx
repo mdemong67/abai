@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const SiteContext = createContext(null);
 
 export function SiteProvider({ children }) {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("bn");
   const [dark, setDark] = useState(false);
 
   useEffect(() => {

@@ -82,8 +82,17 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateUser = (newData) => {
+    setUser(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, ...newData };
+      window.localStorage.setItem("abai-user", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signOut, updateRole }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signOut, updateRole, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
