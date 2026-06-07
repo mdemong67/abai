@@ -44,8 +44,8 @@ export default function SiteHeader({ transparent = false }) {
     <motion.header
       initial={false}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${useTransparent
-          ? "bg-transparent"
-          : "bg-white shadow-[0_10px_35px_rgba(15,23,42,0.10)] dark:bg-[#07111f]"
+        ? "bg-transparent"
+        : "bg-white shadow-[0_10px_35px_rgba(15,23,42,0.10)] dark:bg-[#07111f]"
         }`}
     >
       <nav
@@ -92,6 +92,12 @@ export default function SiteHeader({ transparent = false }) {
               className={`rounded-full px-4 py-2 text-sm font-medium ${linkClass}`}
             >
               {t.events}
+            </Link>
+            <Link
+              href="/news"
+              className={`rounded-full px-4 py-2 text-sm font-medium ${linkClass}`}
+            >
+              {t.news}
             </Link>
             <Link
               href="/portfolio"
@@ -206,6 +212,13 @@ export default function SiteHeader({ transparent = false }) {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/news"
+              onClick={() => setOpen(false)}
+              className="block rounded-2xl px-4 py-3 text-sm font-bold text-[#202423] hover:bg-[#eef5f1] dark:text-white dark:hover:bg-white/10"
+            >
+              {t.news}
+            </Link>
             <Link
               href="/portfolio"
               onClick={() => setOpen(false)}

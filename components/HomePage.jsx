@@ -246,7 +246,7 @@ function Hero({ slides, t }) {
             sizes="100vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.48)_22%,rgba(0,0,0,0.12)_50%,rgba(255,255,255,0.82)_140%)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.54)_22%,rgba(0,0,0,0.18)_50%,rgba(7,10,18,0.94)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.48)_22%,rgba(0,0,0,0.12)_50%,rgba(255,255,255,0.82)_140%)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.54)_22%,rgba(0,0,0,0.18)_50%,rgba(7,10,18,0.94)_150%)]" />
           <div className="absolute inset-0 bg-black/10" />
         </motion.div>
       </AnimatePresence>
@@ -343,7 +343,7 @@ function Service({ t }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ delay: index * 0.05 }}
-                className="rounded-[1.5rem] border border-black/10 bg-[#fbfaf7] p-5 dark:border-white/10 dark:bg-white/5"
+                className="rounded-lg border border-black/10 bg-[#fbfaf7] p-5 dark:border-white/10 dark:bg-white/5"
               >
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#4b0102] text-xl text-white">
                   <Icon aria-hidden="true" />
