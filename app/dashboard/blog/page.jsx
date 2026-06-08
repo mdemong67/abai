@@ -1,30 +1,30 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useAuth } from "@/components/providers/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
-  FiEdit,
-  FiTrash2,
-  FiPlus,
+  FiAlertCircle,
+  FiArrowLeft,
+  FiBold,
   FiCalendar,
-  FiUser,
+  FiCheckCircle,
+  FiEdit,
+  FiEye,
+  FiImage,
+  FiItalic,
+  FiLink,
+  FiList,
+  FiLock,
+  FiPlus,
   FiSearch,
   FiTag,
-  FiArrowLeft,
-  FiLock,
-  FiUploadCloud,
-  FiBold,
-  FiItalic,
+  FiTrash2,
   FiUnderline,
-  FiList,
-  FiLink,
-  FiImage,
+  FiUploadCloud,
+  FiUser,
   FiX,
-  FiEye,
-  FiAlertCircle,
-  FiCheckCircle,
 } from "react-icons/fi";
 
 // Default seed blogs if localStorage is empty
@@ -74,7 +74,7 @@ const CATEGORIES = ["Community", "Culture", "Announcement", "News"];
 
 export default function DashboardBlogPage() {
   const { user } = useAuth();
-  
+
   // Blog State
   const [blogs, setBlogs] = useState([]);
   const [isLoadingBlogs, setIsLoadingBlogs] = useState(true);
@@ -82,7 +82,7 @@ export default function DashboardBlogPage() {
   // Editor Form States
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
-  
+
   // Form fields
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Community");
@@ -295,17 +295,17 @@ export default function DashboardBlogPage() {
       case "bullet":
         replacement = selectedText
           ? selectedText
-              .split("\n")
-              .map((line) => `- ${line}`)
-              .join("\n")
+            .split("\n")
+            .map((line) => `- ${line}`)
+            .join("\n")
           : "- List item";
         break;
       case "number":
         replacement = selectedText
           ? selectedText
-              .split("\n")
-              .map((line, i) => `${i + 1}. ${line}`)
-              .join("\n")
+            .split("\n")
+            .map((line, i) => `${i + 1}. ${line}`)
+            .join("\n")
           : "1. List item";
         break;
       case "link":
@@ -407,11 +407,10 @@ export default function DashboardBlogPage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${
-                notification.type === "error"
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
                   ? "bg-red-600 border-red-500"
                   : "bg-emerald-600 border-emerald-500"
-              }`}
+                }`}
             >
               {notification.type === "error" ? (
                 <FiAlertCircle className="w-6 h-6 shrink-0" />
@@ -421,7 +420,7 @@ export default function DashboardBlogPage() {
               <div className="text-sm font-semibold">{notification.message}</div>
               <button
                 onClick={() => setNotification(null)}
-                className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+                className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -450,12 +449,12 @@ export default function DashboardBlogPage() {
                     Publish and manage blog posts for the diaspora community.
                   </p>
                 </div>
-                
+
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleOpenEditor()}
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
                 >
                   <FiPlus className="w-5 h-5" />
                   <span>New Post</span>
@@ -463,7 +462,7 @@ export default function DashboardBlogPage() {
               </div>
 
               {/* Filtering & Search Bar */}
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
                 {/* Search */}
                 <div className="relative w-full md:max-w-xs">
                   <FiSearch className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500 w-5 h-5" />
@@ -472,23 +471,22 @@ export default function DashboardBlogPage() {
                     placeholder="Search posts..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
                   />
                 </div>
 
                 {/* Filters right side */}
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
                   {/* Category Buttons */}
-                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
+                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-lg border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
                     {["All", ...CATEGORIES].map((cat) => (
                       <button
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-                          selectedCategory === cat
+                        className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${selectedCategory === cat
                             ? "bg-white dark:bg-gray-800 text-primary dark:text-white shadow-sm"
                             : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                        }`}
+                          }`}
                       >
                         {cat}
                       </button>
@@ -496,7 +494,7 @@ export default function DashboardBlogPage() {
                   </div>
 
                   {/* My Posts toggle */}
-                  <label className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 cursor-pointer select-none">
+                  <label className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={myPostsOnly}
@@ -517,7 +515,7 @@ export default function DashboardBlogPage() {
                   <p className="text-gray-500 dark:text-gray-400 mt-4 text-sm font-semibold">Loading blogs...</p>
                 </div>
               ) : filteredBlogs.length === 0 ? (
-                <div className="bg-white dark:bg-gray-800 rounded-3xl py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
+                <div className="bg-white dark:bg-gray-800 rounded-lg py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
                   <FiAlertCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">No Posts Found</h3>
                   <p className="text-gray-500 dark:text-gray-400 mt-1 max-w-md mx-auto text-sm">
@@ -537,7 +535,7 @@ export default function DashboardBlogPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
+                        className="bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
                       >
                         {/* Thumbnail Container */}
                         <div className="relative aspect-video bg-gray-100 dark:bg-gray-900 overflow-hidden">
@@ -552,7 +550,7 @@ export default function DashboardBlogPage() {
                               <FiImage className="w-12 h-12" />
                             </div>
                           )}
-                          
+
                           {/* Badges overlay */}
                           <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                             <span className="px-3 py-1 text-[10px] font-black tracking-wider uppercase rounded-full bg-black/60 backdrop-blur-md text-white border border-white/10">
@@ -616,11 +614,10 @@ export default function DashboardBlogPage() {
                             <button
                               onClick={() => handleOpenEditor(blog)}
                               disabled={!editable}
-                              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                editable
+                              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${editable
                                   ? "bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600"
                                   : "bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border border-gray-200/20 cursor-not-allowed opacity-50 relative group/tooltip"
-                              }`}
+                                }`}
                             >
                               {editable ? (
                                 <>
@@ -631,7 +628,7 @@ export default function DashboardBlogPage() {
                                 <>
                                   <FiLock className="w-4 h-4 text-gray-400 dark:text-gray-600" />
                                   <span>Edit Locked</span>
-                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-xl text-[10px] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
+                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-lg text-[10px] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
                                     Only Admin, Moderator, or Post Author can edit.
                                   </span>
                                 </>
@@ -642,11 +639,10 @@ export default function DashboardBlogPage() {
                             <button
                               onClick={() => handleDeleteBlog(blog.id)}
                               disabled={!deletable}
-                              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${
-                                deletable
+                              className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${deletable
                                   ? "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
                                   : "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50 relative group/tooltip"
-                              }`}
+                                }`}
                               title={deletable ? "Delete post" : "Delete locked"}
                             >
                               {deletable ? (
@@ -654,7 +650,7 @@ export default function DashboardBlogPage() {
                               ) : (
                                 <div className="flex items-center gap-1.5">
                                   <FiLock className="w-4 h-4 text-gray-400 dark:text-gray-600" />
-                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-xl text-[10px] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
+                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-lg text-[10px] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
                                     {user?.role === "moderator"
                                       ? "Moderators are not allowed to delete any posts."
                                       : "Members can only delete their own posts."}
@@ -683,7 +679,7 @@ export default function DashboardBlogPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={handleCloseEditor}
-                  className="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
+                  className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
                 >
                   <FiArrowLeft className="w-5 h-5" />
                 </button>
@@ -701,10 +697,10 @@ export default function DashboardBlogPage() {
 
               {/* Form Element */}
               <form onSubmit={handleSaveBlog} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                
+
                 {/* LEFT SIDE (Main Content - 65% width approx) */}
-                <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
-                  
+                <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
+
                   {/* Blog Title Input */}
                   <div className="space-y-2">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
@@ -722,7 +718,7 @@ export default function DashboardBlogPage() {
 
                   {/* Category & Tags Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                    
+
                     {/* Category Selector */}
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
@@ -732,7 +728,7 @@ export default function DashboardBlogPage() {
                         <select
                           value={category}
                           onChange={(e) => setCategory(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
                         >
                           {CATEGORIES.map((cat) => (
                             <option key={cat} value={cat} className="bg-white dark:bg-gray-800">
@@ -756,7 +752,7 @@ export default function DashboardBlogPage() {
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
                           onKeyDown={handleTagKeyDown}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                         />
                         <FiTag className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500 w-4.5 h-4.5" />
                       </div>
@@ -770,7 +766,7 @@ export default function DashboardBlogPage() {
                               initial={{ opacity: 0, scale: 0.8 }}
                               animate={{ opacity: 1, scale: 1 }}
                               exit={{ opacity: 0, scale: 0.8 }}
-                              className="inline-flex items-center gap-1 bg-[#4b0102]/5 dark:bg-gray-900 border border-[#4b0102]/10 dark:border-gray-700 text-[#4b0102] dark:text-accent font-bold px-2.5 py-1 rounded-xl text-xs hover:bg-[#4b0102]/10 dark:hover:bg-gray-800 transition-colors"
+                              className="inline-flex items-center gap-1 bg-[#4b0102]/5 dark:bg-gray-900 border border-[#4b0102]/10 dark:border-gray-700 text-[#4b0102] dark:text-accent font-bold px-2.5 py-1 rounded-lg text-xs hover:bg-[#4b0102]/10 dark:hover:bg-gray-800 transition-colors"
                             >
                               <span>{tag}</span>
                               <button
@@ -797,7 +793,7 @@ export default function DashboardBlogPage() {
                       value={excerpt}
                       onChange={(e) => setExcerpt(e.target.value)}
                       rows={2}
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent placeholder-gray-400 resize-none"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent placeholder-gray-400 resize-none"
                     />
                   </div>
 
@@ -812,7 +808,7 @@ export default function DashboardBlogPage() {
                       </span>
                     </div>
 
-                    <div className="border border-slate-200 dark:border-gray-700 rounded-3xl overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
+                    <div className="border border-slate-200 dark:border-gray-700 rounded-lg overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
                       {/* Formatted Toolbar */}
                       <div className="bg-slate-50 dark:bg-gray-900/80 px-4 py-3 border-b border-slate-200 dark:border-gray-700 flex flex-wrap items-center gap-1.5">
                         {[
@@ -824,7 +820,7 @@ export default function DashboardBlogPage() {
                             key={btn.type}
                             type="button"
                             onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                             title={btn.tooltip}
                           >
                             <btn.icon className="w-4 h-4" />
@@ -841,7 +837,7 @@ export default function DashboardBlogPage() {
                             key={btn.type}
                             type="button"
                             onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                             title={btn.tooltip}
                           >
                             <btn.icon className="w-4 h-4" />
@@ -868,9 +864,9 @@ export default function DashboardBlogPage() {
 
                 {/* RIGHT SIDE (Sidebar Settings - 35% width approx) */}
                 <div className="lg:col-span-4 space-y-6">
-                  
+
                   {/* Thumbnail Image Uploader */}
-                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
                       Thumbnail Image
                     </label>
@@ -881,13 +877,12 @@ export default function DashboardBlogPage() {
                       onDragLeave={handleDrag}
                       onDrop={handleDrop}
                       onClick={() => fileInputRef.current.click()}
-                      className={`relative min-h-[180px] rounded-2xl border-2 border-dashed flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-300 ${
-                        dragActive
+                      className={`relative min-h-[180px] rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-300 ${dragActive
                           ? "border-primary bg-primary/5 dark:border-accent dark:bg-accent/5"
                           : imageUrl
-                          ? "border-emerald-300 bg-slate-50 dark:bg-gray-900/20 border-solid"
-                          : "border-slate-200 hover:border-primary/40 dark:border-gray-700 dark:hover:border-accent/40 bg-slate-50/50 dark:bg-gray-900/10"
-                      }`}
+                            ? "border-emerald-300 bg-slate-50 dark:bg-gray-900/20 border-solid"
+                            : "border-slate-200 hover:border-primary/40 dark:border-gray-700 dark:hover:border-accent/40 bg-slate-50/50 dark:bg-gray-900/10"
+                        }`}
                     >
                       <input
                         ref={fileInputRef}
@@ -899,7 +894,7 @@ export default function DashboardBlogPage() {
 
                       {imageUrl ? (
                         <div className="w-full space-y-3">
-                          <div className="relative aspect-video rounded-xl overflow-hidden shadow-inner border border-gray-100 dark:border-gray-800">
+                          <div className="relative aspect-video rounded-lg overflow-hidden shadow-inner border border-gray-100 dark:border-gray-800">
                             <img
                               src={imageUrl}
                               alt="Thumbnail preview"
@@ -921,7 +916,7 @@ export default function DashboardBlogPage() {
                           </div>
 
                           {imageMetadata && (
-                            <div className="text-[11px] text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-950 p-2.5 rounded-xl border border-gray-100 dark:border-gray-900 text-left space-y-1">
+                            <div className="text-[11px] text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-950 p-2.5 rounded-lg border border-gray-100 dark:border-gray-900 text-left space-y-1">
                               <p className="font-bold truncate text-gray-700 dark:text-gray-300">
                                 {imageMetadata.name}
                               </p>
@@ -941,7 +936,7 @@ export default function DashboardBlogPage() {
                         </div>
                       ) : (
                         <div className="space-y-2 pointer-events-none">
-                          <div className="mx-auto w-12 h-12 bg-white dark:bg-gray-800 rounded-2xl flex items-center justify-center shadow border border-gray-100 dark:border-gray-700 text-gray-400">
+                          <div className="mx-auto w-12 h-12 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center shadow border border-gray-100 dark:border-gray-700 text-gray-400">
                             <FiUploadCloud className="w-6 h-6" />
                           </div>
                           <div className="text-xs font-bold text-gray-700 dark:text-gray-300">
@@ -956,7 +951,7 @@ export default function DashboardBlogPage() {
                   </div>
 
                   {/* Settings Box */}
-                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
                       Publish Settings
                     </label>
@@ -966,7 +961,7 @@ export default function DashboardBlogPage() {
                       <label className="text-[11px] font-bold text-gray-500 dark:text-gray-400 block">
                         Visibility Status
                       </label>
-                      <div className="flex bg-slate-50 dark:bg-gray-900 p-1 rounded-2xl border border-slate-100 dark:border-gray-800">
+                      <div className="flex bg-slate-50 dark:bg-gray-900 p-1 rounded-lg border border-slate-100 dark:border-gray-800">
                         {["Published", "Draft"].map((st) => {
                           const isSel = status === st;
                           return (
@@ -974,11 +969,10 @@ export default function DashboardBlogPage() {
                               key={st}
                               type="button"
                               onClick={() => setStatus(st)}
-                              className={`flex-1 py-2.5 text-center text-xs font-bold rounded-xl transition-all cursor-pointer ${
-                                isSel
+                              className={`flex-1 py-2.5 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${isSel
                                   ? "bg-white dark:bg-gray-800 text-primary dark:text-white shadow-sm"
                                   : "text-gray-500 hover:text-gray-900 dark:hover:text-white"
-                              }`}
+                                }`}
                             >
                               {st}
                             </button>
@@ -988,7 +982,7 @@ export default function DashboardBlogPage() {
                     </div>
 
                     {/* Policy Card info based on Role */}
-                    <div className="p-3.5 bg-gradient-to-r from-slate-50 to-zinc-50 dark:from-slate-950/20 dark:to-zinc-950/20 border border-slate-100 dark:border-gray-800 rounded-2xl space-y-2">
+                    <div className="p-3.5 bg-gradient-to-r from-slate-50 to-zinc-50 dark:from-slate-950/20 dark:to-zinc-950/20 border border-slate-100 dark:border-gray-800 rounded-lg space-y-2">
                       <div className="flex items-center gap-1.5 text-xs font-black text-gray-700 dark:text-gray-300">
                         <FiLock className="w-3.5 h-3.5 text-accent" />
                         <span>Role Protection Rules</span>
@@ -997,8 +991,8 @@ export default function DashboardBlogPage() {
                         {user?.role === "admin"
                           ? "As an Admin, you are posting with root permissions. This blog will be fully editable and deletable."
                           : user?.role === "moderator"
-                          ? "As a Moderator, you can edit this and other posts, but you will not have permission to delete it or other articles."
-                          : "As a Member, you have owned access. You can edit and delete this post, but you cannot edit or delete posts belonging to others."}
+                            ? "As a Moderator, you can edit this and other posts, but you will not have permission to delete it or other articles."
+                            : "As a Member, you have owned access. You can edit and delete this post, but you cannot edit or delete posts belonging to others."}
                       </p>
                     </div>
                   </div>
@@ -1010,7 +1004,7 @@ export default function DashboardBlogPage() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full py-3.5 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white rounded-2xl font-bold shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
+                      className="w-full py-3.5 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white rounded-lg font-bold shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
                     >
                       <FiEye className="w-4.5 h-4.5" />
                       <span>{editingBlog ? "Update Post" : "Publish Post"}</span>
@@ -1022,7 +1016,7 @@ export default function DashboardBlogPage() {
                       whileTap={{ scale: 0.98 }}
                       type="button"
                       onClick={handleCloseEditor}
-                      className="w-full py-3.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-slate-200 dark:border-gray-700 rounded-2xl font-bold transition-all hover:bg-slate-50 dark:hover:bg-gray-700 flex items-center justify-center gap-2 cursor-pointer text-sm"
+                      className="w-full py-3.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-slate-200 dark:border-gray-700 rounded-lg font-bold transition-all hover:bg-slate-50 dark:hover:bg-gray-700 flex items-center justify-center gap-2 cursor-pointer text-sm"
                     >
                       Cancel & Exit
                     </motion.button>

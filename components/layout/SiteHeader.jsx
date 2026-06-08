@@ -142,9 +142,9 @@ export default function SiteHeader({ transparent = false }) {
               </Link>
               <Link
                 href="/dashboard"
-                className={`grid h-10 w-10 place-items-center rounded-full ${iconClass}`}
+                className={`grid h-10 w-10 place-items-center border border-[#4b0102] bg-[#4b0102] rounded-full text-white`}
               >
-                <FiUser />
+                <FiUser className="text-2xl" />
               </Link>
             </>
           ) : (
@@ -166,11 +166,11 @@ export default function SiteHeader({ transparent = false }) {
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className={`grid h-10 w-10 place-items-center rounded-full lg:hidden ${iconClass}`}
+            className={`grid h-14 w-14 place-items-center rounded-full lg:hidden ${iconClass}`}
             aria-expanded={open}
             aria-label="Open menu"
           >
-            {open ? <FiX /> : <FiMenu />}
+            {open ? <FiX className="text-4xl" /> : <FiMenu className="text-4xl" />}
           </button>
         </div>
       </nav>

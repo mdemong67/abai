@@ -1,20 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiSearch, FiCalendar, FiMapPin, FiClock, FiLayers, FiArrowRight, FiFilter } from "react-icons/fi";
 import PageShell from "@/components/layout/PageShell";
 import { useSite } from "@/components/providers/SiteProvider";
 import {
-  newsMeta,
   newsCategories,
-  newsCategoryKeys,
-  newsYears,
   newsCategoryAccent,
+  newsCategoryKeys,
   newsItems,
+  newsMeta,
+  newsYears,
 } from "@/lib/news-data";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { FiArrowRight, FiCalendar, FiClock, FiFilter, FiLayers, FiMapPin, FiSearch } from "react-icons/fi";
 
 export default function NewsPage() {
   const { language } = useSite();
@@ -86,7 +86,7 @@ export default function NewsPage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
             {/* Sidebar filters — desktop */}
             <aside className="hidden w-56 shrink-0 lg:block">
-              <div className="sticky top-8">
+              <div className="sticky top-32">
                 <p className="text-xs font-black uppercase text-[#4b0102]">{meta.categoriesHeading}</p>
                 <ul className="mt-3 space-y-1">
                   {newsCategoryKeys.map((key) => (
@@ -94,11 +94,10 @@ export default function NewsPage() {
                       <button
                         type="button"
                         onClick={() => setCategory(key)}
-                        className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition-colors ${
-                          category === key
-                            ? "bg-[#4b0102] text-white"
-                            : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
-                        }`}
+                        className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition-colors ${category === key
+                          ? "bg-[#4b0102] text-white"
+                          : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
+                          }`}
                       >
                         {cats[key]}
                       </button>
@@ -112,11 +111,10 @@ export default function NewsPage() {
                     <button
                       type="button"
                       onClick={() => setYear("all")}
-                      className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${
-                        year === "all"
-                          ? "bg-[#009b5a] text-white"
-                          : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
-                      }`}
+                      className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${year === "all"
+                        ? "bg-[#009b5a] text-white"
+                        : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
+                        }`}
                     >
                       {meta.filterAll}
                     </button>
@@ -126,11 +124,10 @@ export default function NewsPage() {
                       <button
                         type="button"
                         onClick={() => setYear(String(y))}
-                        className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${
-                          year === String(y)
-                            ? "bg-[#009b5a] text-white"
-                            : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
-                        }`}
+                        className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${year === String(y)
+                          ? "bg-[#009b5a] text-white"
+                          : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
+                          }`}
                       >
                         {y}
                       </button>
@@ -183,11 +180,10 @@ export default function NewsPage() {
                           key={key}
                           type="button"
                           onClick={() => setCategory(key)}
-                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${
-                            category === key
-                              ? "bg-[#4b0102] text-white"
-                              : "bg-[#f1f6ff] text-[#4b0102] dark:bg-white/10"
-                          }`}
+                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${category === key
+                            ? "bg-[#4b0102] text-white"
+                            : "bg-[#f1f6ff] text-[#4b0102] dark:bg-white/10"
+                            }`}
                         >
                           {cats[key]}
                         </button>
@@ -198,9 +194,8 @@ export default function NewsPage() {
                       <button
                         type="button"
                         onClick={() => setYear("all")}
-                        className={`rounded-full px-3 py-1.5 text-xs font-bold ${
-                          year === "all" ? "bg-[#009b5a] text-white" : "bg-[#e9f7f0] text-[#113927]"
-                        }`}
+                        className={`rounded-full px-3 py-1.5 text-xs font-bold ${year === "all" ? "bg-[#009b5a] text-white" : "bg-[#e9f7f0] text-[#113927]"
+                          }`}
                       >
                         {meta.filterAll}
                       </button>
@@ -209,11 +204,10 @@ export default function NewsPage() {
                           key={y}
                           type="button"
                           onClick={() => setYear(String(y))}
-                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${
-                            year === String(y)
-                              ? "bg-[#009b5a] text-white"
-                              : "bg-[#e9f7f0] text-[#113927] dark:bg-white/10 dark:text-white"
-                          }`}
+                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${year === String(y)
+                            ? "bg-[#009b5a] text-white"
+                            : "bg-[#e9f7f0] text-[#113927] dark:bg-white/10 dark:text-white"
+                            }`}
                         >
                           {y}
                         </button>
@@ -344,9 +338,8 @@ function NewsCard({ item, lang, cats, meta, large = false, index }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ delay: index * 0.03, duration: 0.35 }}
-      className={`group cursor-pointer overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm transition-shadow hover:shadow-xl dark:border-white/10 dark:bg-white/5 ${
-        large ? "sm:min-h-[320px]" : ""
-      }`}
+      className={`group cursor-pointer overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm transition-shadow hover:shadow-xl dark:border-white/10 dark:bg-white/5 ${large ? "sm:min-h-[320px]" : ""
+        }`}
     >
       <Link href={`/news/${item.id}`} className="block">
         <div className={`relative overflow-hidden ${large ? "h-64 sm:h-72" : "h-48"}`}>

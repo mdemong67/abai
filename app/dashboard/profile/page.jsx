@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useAuth } from "@/components/providers/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiHome,
-  FiUploadCloud,
-  FiX,
   FiAlertCircle,
   FiCheckCircle,
+  FiHome,
+  FiMail,
+  FiPhone,
   FiShield,
+  FiUploadCloud,
+  FiUser,
+  FiX,
 } from "react-icons/fi";
 
 export default function DashboardProfilePage() {
@@ -111,7 +111,7 @@ export default function DashboardProfilePage() {
 
   return (
     <ProtectedRoute>
-      <div className="space-y-6 max-w-4xl mx-auto pb-12">
+      <div className="space-y-5 w-full mx-auto pb-12">
         {/* Floating Notification */}
         <AnimatePresence>
           {notification && (
@@ -119,11 +119,10 @@ export default function DashboardProfilePage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${
-                notification.type === "error"
-                  ? "bg-red-600 border-red-500"
-                  : "bg-emerald-600 border-emerald-500"
-              }`}
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
+                ? "bg-red-600 border-red-500"
+                : "bg-emerald-600 border-emerald-500"
+                }`}
             >
               {notification.type === "error" ? (
                 <FiAlertCircle className="w-6 h-6 shrink-0" />
@@ -133,7 +132,7 @@ export default function DashboardProfilePage() {
               <div className="text-sm font-semibold">{notification.message}</div>
               <button
                 onClick={() => setNotification(null)}
-                className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+                className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -153,7 +152,7 @@ export default function DashboardProfilePage() {
 
         <form onSubmit={handleSave} className="space-y-8">
           {/* Avatar Upload Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
               Profile Photo
             </h2>
@@ -190,11 +189,10 @@ export default function DashboardProfilePage() {
                   onDragOver={handleDrag}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
-                    dragActive
-                      ? "border-[#4b0102] bg-[#4b0102]/5"
-                      : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
-                  }`}
+                  className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${dragActive
+                    ? "border-[#4b0102] bg-[#4b0102]/5"
+                    : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
+                    }`}
                 >
                   <input
                     ref={fileInputRef}
@@ -216,7 +214,7 @@ export default function DashboardProfilePage() {
           </div>
 
           {/* Personal Info Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">
               Personal Information
             </h2>
@@ -233,7 +231,7 @@ export default function DashboardProfilePage() {
                   placeholder="Enter your full name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                   required
                 />
               </div>
@@ -251,7 +249,7 @@ export default function DashboardProfilePage() {
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                   required
                 />
               </div>
@@ -269,7 +267,7 @@ export default function DashboardProfilePage() {
                   placeholder="+353 83 123 4567"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                 />
               </div>
             </div>
@@ -286,14 +284,14 @@ export default function DashboardProfilePage() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   rows={3}
-                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
+                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
                 />
               </div>
             </div>
           </div>
 
           {/* Role Info */}
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
               Account Role
             </h2>
@@ -316,7 +314,7 @@ export default function DashboardProfilePage() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-8 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-8 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
             >
               <FiCheckCircle className="w-5 h-5" />
               Save Changes

@@ -136,7 +136,7 @@ export default function MemberDetailsPage() {
           <h3 className="text-lg font-bold text-gray-900 dark:text-white">Member Not Found</h3>
           <button
             onClick={() => router.push("/dashboard/users")}
-            className="mt-4 px-6 py-3 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] text-white rounded-2xl font-bold"
+            className="mt-4 px-6 py-3 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] text-white rounded-lg font-bold"
           >
             Back to Members
           </button>
@@ -154,9 +154,9 @@ export default function MemberDetailsPage() {
             initial={{ opacity: 0, y: -50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${notification.type === "error"
-                ? "bg-red-600 border-red-500"
-                : "bg-emerald-600 border-emerald-500"
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
+              ? "bg-red-600 border-red-500"
+              : "bg-emerald-600 border-emerald-500"
               }`}
           >
             {notification.type === "error" ? (
@@ -167,7 +167,7 @@ export default function MemberDetailsPage() {
             <div className="text-sm font-semibold">{notification.message}</div>
             <button
               onClick={() => setNotification(null)}
-              className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+              className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
             >
               <FiX className="w-4 h-4" />
             </button>
@@ -178,7 +178,7 @@ export default function MemberDetailsPage() {
         <div className="flex items-center gap-4 mb-8">
           <button
             onClick={() => router.push("/dashboard/users")}
-            className="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
+            className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
           >
             <FiArrowLeft className="w-5 h-5" />
           </button>
@@ -194,7 +194,7 @@ export default function MemberDetailsPage() {
 
         <div className="grid gap-8">
           {/* Member Card */}
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Avatar */}
               <div className="flex-shrink-0">
@@ -216,10 +216,10 @@ export default function MemberDetailsPage() {
                 <div className="flex flex-wrap gap-3 mb-6">
                   <span
                     className={`px-4 py-1.5 text-xs font-black tracking-wider uppercase rounded-full border ${member.role === "admin"
-                        ? "bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400 border-red-200 dark:border-red-900/50"
-                        : member.role === "moderator"
-                          ? "bg-blue-50 text-blue-700 dark:bg-blue-950/20 dark:text-blue-400 border-blue-200 dark:border-blue-900/50"
-                          : "bg-green-50 text-green-700 dark:bg-green-950/20 dark:text-green-400 border-green-200 dark:border-green-900/50"
+                      ? "bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400 border-red-200 dark:border-red-900/50"
+                      : member.role === "moderator"
+                        ? "bg-blue-50 text-blue-700 dark:bg-blue-950/20 dark:text-blue-400 border-blue-200 dark:border-blue-900/50"
+                        : "bg-green-50 text-green-700 dark:bg-green-950/20 dark:text-green-400 border-green-200 dark:border-green-900/50"
                       }`}
                   >
                     {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
@@ -298,14 +298,14 @@ export default function MemberDetailsPage() {
             <div className="flex items-center gap-3 mt-8 pt-6 border-t border-gray-50 dark:border-gray-700/50">
               <button
                 onClick={() => router.push("/dashboard/users")}
-                className="px-6 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold transition-all cursor-pointer"
+                className="px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold transition-all cursor-pointer"
               >
                 Back to Members
               </button>
 
               <button
                 onClick={() => router.push(`/dashboard/users?edit=${member.id}`)}
-                className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-blue-950/30 dark:hover:text-blue-400 border border-slate-200/50 dark:border-gray-600 hover:border-blue-200/50 dark:hover:border-blue-900/50 text-sm font-bold transition-all cursor-pointer"
+                className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-blue-950/30 dark:hover:text-blue-400 border border-slate-200/50 dark:border-gray-600 hover:border-blue-200/50 dark:hover:border-blue-900/50 text-sm font-bold transition-all cursor-pointer"
               >
                 <FiEdit className="w-4.5 h-4.5" />
                 Edit Member
@@ -314,9 +314,9 @@ export default function MemberDetailsPage() {
               <button
                 onClick={handleDelete}
                 disabled={memberId === user?.id}
-                className={`px-6 py-3 rounded-2xl text-sm font-bold border transition-all cursor-pointer flex items-center justify-center gap-2 ${memberId === user?.id
-                    ? "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50"
-                    : "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
+                className={`px-6 py-3 rounded-lg text-sm font-bold border transition-all cursor-pointer flex items-center justify-center gap-2 ${memberId === user?.id
+                  ? "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50"
+                  : "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
                   }`}
               >
                 {memberId === user?.id ? (
