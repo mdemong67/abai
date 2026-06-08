@@ -133,7 +133,7 @@ export default function DashboardLayout({ children }) {
               <Link href="/" className="flex items-center gap-3">
                 <Image src="/images/abai-logo.png" alt="ABAI Logo" width={56} height={56} className="w-16 h-16 sm:w-22 sm:h-22 rounded-full object-cover" priority />
                 <div>
-                  <p className="font-bold text-md sm:text-md text-[#4b0102]">
+                  <p className="font-bold text-md sm:text-md text-[#4b0102] dark:text-white">
                     All Bangladeshi Association of Ireland (ABAI)
                   </p>
                 </div>
@@ -156,7 +156,7 @@ export default function DashboardLayout({ children }) {
                       <Link
                         href={item.href}
                         onClick={() => setSidebarOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-[#4b0102]/5 dark:hover:bg-gray-700 hover:text-[#4b0102] dark:hover:text-white group transition-all duration-200"
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-[#4b0102]/5 dark:hover:bg-gray-700 hover:text-[#4b0102] dark:hover:text-white group transition-all duration-200"
                       >
                         <item.icon className="w-5 h-5" />
                         <span className="font-medium">{item.label}</span>
@@ -199,7 +199,7 @@ export default function DashboardLayout({ children }) {
             <div className="p-6 border-t border-gray-100 dark:border-gray-700">
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-[#4b0102]/20 bg-[#4b0102] text-white font-bold transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#4b0102]/20 bg-[#4b0102] text-white font-bold transition-all duration-200"
               >
                 <FiLogOut className="w-5 h-5" />
                 <span>Sign Out</span>
@@ -268,7 +268,7 @@ export default function DashboardLayout({ children }) {
           </header>
 
           {/* Page Content */}
-          <main className="p-6 lg:p-10">
+          <main className="p-3 lg:p-5">
             {children}
           </main>
         </div>

@@ -116,7 +116,7 @@ export default function DashboardPage() {
   const stats = STATS[user?.role || "member"];
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-5">
       {/* Welcome Section */}
       <div>
         <h1 className="text-3xl sm:text-4xl font-black text-[#191d1c] dark:text-white">
@@ -128,17 +128,17 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+            className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-100 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
           >
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm font-bold text-[#5b6461] dark:text-white/70">
                 {stat.title}
               </p>
-              <div className="w-14 h-14 rounded-2xl bg-[#4b0102]/10 flex items-center justify-center text-[#4b0102]">
+              <div className="w-14 h-14 rounded-lg bg-[#4b0102]/10 flex items-center justify-center text-[#4b0102]">
                 <stat.icon className="w-7 h-7" />
               </div>
             </div>
@@ -154,9 +154,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity & Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Recent Activity */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
           <h2 className="text-xl font-black text-[#191d1c] dark:text-white mb-6">
             Recent Activity
           </h2>
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             {RECENT_ACTIVITIES.map((activity) => (
               <div
                 key={activity.id}
-                className="flex items-start gap-4 p-4 rounded-2xl hover:bg-[#4b0102]/5 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="flex items-start gap-4 p-4 rounded-lg hover:bg-[#4b0102]/5 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <div className="w-3 h-3 mt-2 rounded-full bg-[#4b0102]"></div>
                 <div className="flex-1">
@@ -181,7 +181,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-gradient-to-br from-white to-[#fdf8f3] dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
+        <div className="bg-gradient-to-br from-white to-[#fdf8f3] dark:from-gray-800 dark:to-gray-900 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
           <h2 className="text-xl font-black text-[#191d1c] dark:text-white mb-6">
             Quick Actions
           </h2>
@@ -189,9 +189,9 @@ export default function DashboardPage() {
             {QUICK_ACTIONS.map((action, index) => (
               <button
                 key={index}
-                className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#4b0102]/5 hover:bg-[#4b0102]/10 transition-all duration-300"
+                className="flex flex-col items-center justify-center p-6 rounded-lg bg-[#4b0102]/5 hover:bg-[#4b0102]/10 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#4b0102] flex items-center justify-center text-white mb-3">
+                <div className="w-12 h-12 rounded-lg bg-[#4b0102] flex items-center justify-center text-white mb-3">
                   <action.icon className="w-6 h-6" />
                 </div>
                 <span className="font-bold text-[#191d1c] dark:text-white">
@@ -204,9 +204,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Impact Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-[#4b0102]/10 flex items-center justify-center text-[#4b0102]">
+          <div className="w-10 h-10 rounded-lg bg-[#4b0102]/10 flex items-center justify-center text-[#4b0102]">
             <FiHeart className="w-5 h-5" />
           </div>
           <h2 className="text-xl font-black text-[#191d1c] dark:text-white">

@@ -1,30 +1,29 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useAuth } from "@/components/providers/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
-  FiEdit,
-  FiTrash2,
-  FiPlus,
+  FiAlertCircle,
+  FiArrowLeft,
+  FiBold,
   FiCalendar,
-  FiUser,
+  FiCheckCircle,
+  FiEdit,
+  FiImage,
+  FiItalic,
+  FiLink,
+  FiList,
+  FiLock,
+  FiPlus,
   FiSearch,
   FiTag,
-  FiArrowLeft,
-  FiLock,
-  FiUploadCloud,
-  FiBold,
-  FiItalic,
+  FiTrash2,
   FiUnderline,
-  FiList,
-  FiLink,
-  FiImage,
-  FiX,
-  FiEye,
-  FiAlertCircle,
-  FiCheckCircle,
+  FiUploadCloud,
+  FiUser,
+  FiX
 } from "react-icons/fi";
 
 // Default seed news if localStorage is empty
@@ -292,17 +291,17 @@ export default function DashboardNewsPage() {
       case "bullet":
         replacement = selectedText
           ? selectedText
-              .split("\n")
-              .map((line) => `- ${line}`)
-              .join("\n")
+            .split("\n")
+            .map((line) => `- ${line}`)
+            .join("\n")
           : "- List item";
         break;
       case "number":
         replacement = selectedText
           ? selectedText
-              .split("\n")
-              .map((line, i) => `${i + 1}. ${line}`)
-              .join("\n")
+            .split("\n")
+            .map((line, i) => `${i + 1}. ${line}`)
+            .join("\n")
           : "1. List item";
         break;
       case "link":
@@ -405,11 +404,10 @@ export default function DashboardNewsPage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${
-                notification.type === "error"
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
                   ? "bg-red-600 border-red-500"
                   : "bg-emerald-600 border-emerald-500"
-              }`}
+                }`}
             >
               {notification.type === "error" ? (
                 <FiAlertCircle className="w-6 h-6 shrink-0" />
@@ -419,7 +417,7 @@ export default function DashboardNewsPage() {
               <div className="text-sm font-semibold">{notification.message}</div>
               <button
                 onClick={() => setNotification(null)}
-                className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+                className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -453,7 +451,7 @@ export default function DashboardNewsPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleOpenEditor()}
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
                 >
                   <FiPlus className="w-5 h-5" />
                   <span>New News Item</span>
@@ -461,7 +459,7 @@ export default function DashboardNewsPage() {
               </div>
 
               {/* Filtering & Search Bar */}
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
                 {/* Search */}
                 <div className="relative w-full md:max-w-xs">
                   <FiSearch className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500 w-5 h-5" />
@@ -470,23 +468,22 @@ export default function DashboardNewsPage() {
                     placeholder="Search news..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
                   />
                 </div>
 
                 {/* Filters right side */}
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
                   {/* Category Buttons */}
-                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
+                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-lg border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
                     {["All", ...CATEGORIES].map((cat) => (
                       <button
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-                          selectedCategory === cat
+                        className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${selectedCategory === cat
                             ? "bg-white dark:bg-gray-800 text-primary dark:text-white shadow-sm"
                             : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                        }`}
+                          }`}
                       >
                         {cat}
                       </button>
@@ -494,7 +491,7 @@ export default function DashboardNewsPage() {
                   </div>
 
                   {/* My News toggle */}
-                  <label className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 cursor-pointer select-none">
+                  <label className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={myNewsOnly}
@@ -515,7 +512,7 @@ export default function DashboardNewsPage() {
                   <p className="text-gray-500 dark:text-gray-400 mt-4 text-sm font-semibold">Loading news...</p>
                 </div>
               ) : filteredNews.length === 0 ? (
-                <div className="bg-white dark:bg-gray-800 rounded-3xl py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
+                <div className="bg-white dark:bg-gray-800 rounded-lg py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
                   <FiAlertCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">No News Found</h3>
                   <p className="text-gray-500 dark:text-gray-400 mt-1 max-w-md mx-auto text-sm">
@@ -535,7 +532,7 @@ export default function DashboardNewsPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
+                        className="bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
                       >
                         {/* Thumbnail Container */}
                         <div className="relative aspect-video bg-gray-100 dark:bg-gray-900 overflow-hidden">
@@ -614,11 +611,10 @@ export default function DashboardNewsPage() {
                             <button
                               onClick={() => handleOpenEditor(item)}
                               disabled={!editable}
-                              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                editable
+                              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${editable
                                   ? "bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600"
                                   : "bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border border-gray-200/20 cursor-not-allowed opacity-50 relative group/tooltip"
-                              }`}
+                                }`}
                             >
                               {editable ? (
                                 <>
@@ -629,7 +625,7 @@ export default function DashboardNewsPage() {
                                 <>
                                   <FiLock className="w-4 h-4 text-gray-400 dark:text-gray-600" />
                                   <span>Edit Locked</span>
-                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-xl text-[0.65rem] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
+                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-lg text-[0.65rem] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
                                     Only Admin, Moderator, or Author can edit.
                                   </span>
                                 </>
@@ -640,11 +636,10 @@ export default function DashboardNewsPage() {
                             <button
                               onClick={() => handleDeleteNews(item.id)}
                               disabled={!deletable}
-                              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${
-                                deletable
+                              className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${deletable
                                   ? "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
                                   : "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50 relative group/tooltip"
-                              }`}
+                                }`}
                               title={deletable ? "Delete news" : "Delete locked"}
                             >
                               {deletable ? (
@@ -652,7 +647,7 @@ export default function DashboardNewsPage() {
                               ) : (
                                 <div className="flex items-center gap-1.5">
                                   <FiLock className="w-4 h-4 text-gray-400 dark:text-gray-600" />
-                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-xl text-[0.65rem] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
+                                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 text-center p-2 bg-gray-900 text-white rounded-lg text-[0.65rem] hidden group-hover/tooltip:block z-20 shadow-xl leading-normal">
                                     {user?.role === "moderator"
                                       ? "Moderators are not allowed to delete news items."
                                       : "Members can only delete their own items."}
@@ -681,7 +676,7 @@ export default function DashboardNewsPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={handleCloseEditor}
-                  className="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
+                  className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
                 >
                   <FiArrowLeft className="w-5 h-5" />
                 </button>
@@ -700,7 +695,7 @@ export default function DashboardNewsPage() {
               {/* Form Element */}
               <form onSubmit={handleSaveNews} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* LEFT SIDE (Main Content - 65% width approx) */}
-                <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
+                <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
                   {/* News Title Input */}
                   <div className="space-y-2">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
@@ -729,7 +724,7 @@ export default function DashboardNewsPage() {
                           type="date"
                           value={newsDate}
                           onChange={(e) => setNewsDate(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                           required
                         />
                       </div>
@@ -744,7 +739,7 @@ export default function DashboardNewsPage() {
                         <select
                           value={category}
                           onChange={(e) => setCategory(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
                         >
                           {CATEGORIES.map((cat) => (
                             <option key={cat} value={cat} className="bg-white dark:bg-gray-800">
@@ -769,7 +764,7 @@ export default function DashboardNewsPage() {
                         value={tagInput}
                         onChange={(e) => setTagInput(e.target.value)}
                         onKeyDown={handleTagKeyDown}
-                        className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                        className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                       />
                       <FiTag className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500 w-4.5 h-4.5" />
                     </div>
@@ -783,7 +778,7 @@ export default function DashboardNewsPage() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            className="inline-flex items-center gap-1 bg-[#4b0102]/5 dark:bg-gray-900 border border-[#4b0102]/10 dark:border-gray-700 text-[#4b0102] dark:text-accent font-bold px-2.5 py-1 rounded-xl text-xs hover:bg-[#4b0102]/10 dark:hover:bg-gray-800 transition-colors"
+                            className="inline-flex items-center gap-1 bg-[#4b0102]/5 dark:bg-gray-900 border border-[#4b0102]/10 dark:border-gray-700 text-[#4b0102] dark:text-accent font-bold px-2.5 py-1 rounded-lg text-xs hover:bg-[#4b0102]/10 dark:hover:bg-gray-800 transition-colors"
                           >
                             <span>{tag}</span>
                             <button
@@ -810,7 +805,7 @@ export default function DashboardNewsPage() {
                       </span>
                     </div>
 
-                    <div className="border border-slate-200 dark:border-gray-700 rounded-3xl overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
+                    <div className="border border-slate-200 dark:border-gray-700 rounded-lg overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
                       {/* Formatted Toolbar */}
                       <div className="bg-slate-50 dark:bg-gray-900/80 px-4 py-3 border-b border-slate-200 dark:border-gray-700 flex flex-wrap items-center gap-1.5">
                         {[
@@ -822,7 +817,7 @@ export default function DashboardNewsPage() {
                             key={btn.type}
                             type="button"
                             onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                             title={btn.tooltip}
                           >
                             <btn.icon className="w-4 h-4" />
@@ -839,7 +834,7 @@ export default function DashboardNewsPage() {
                             key={btn.type}
                             type="button"
                             onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                             title={btn.tooltip}
                           >
                             <btn.icon className="w-4 h-4" />
@@ -867,12 +862,12 @@ export default function DashboardNewsPage() {
                 {/* RIGHT SIDE (Sidebar Settings - 35% width approx) */}
                 <div className="lg:col-span-4 space-y-6">
                   {/* Thumbnail Image Uploader */}
-                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
                       Thumbnail Image
                     </label>
                     {imageUrl ? (
-                      <div className="relative aspect-video rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+                      <div className="relative aspect-video rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
                         <img src={imageUrl} alt="Thumbnail" className="w-full h-full object-cover" />
                         <button
                           type="button"
@@ -892,11 +887,10 @@ export default function DashboardNewsPage() {
                         onDragOver={handleDrag}
                         onDrop={handleDrop}
                         onClick={() => fileInputRef.current?.click()}
-                        className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${
-                          dragActive
+                        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all cursor-pointer ${dragActive
                             ? "border-primary bg-primary/5"
                             : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-gray-50 dark:bg-gray-900/50"
-                        }`}
+                          }`}
                       >
                         <input
                           type="file"
@@ -923,7 +917,7 @@ export default function DashboardNewsPage() {
                   </div>
 
                   {/* Status & Publish Controls */}
-                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
                       Status & Save
                     </label>
@@ -931,14 +925,14 @@ export default function DashboardNewsPage() {
                       <select
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
                       >
                         <option value="Published">Published</option>
                         <option value="Draft">Draft</option>
                       </select>
                       <button
                         type="submit"
-                        className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+                        className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
                       >
                         {editingNews ? "Update News" : "Save & Publish"}
                       </button>

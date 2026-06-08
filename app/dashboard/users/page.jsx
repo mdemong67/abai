@@ -259,7 +259,7 @@ export default function DashboardMembersPage() {
 
   return (
     <ProtectedRoute allowedRoles={["admin"]}>
-      <div className="space-y-6 max-w-7xl mx-auto pb-12">
+      <div className="space-y-5 max-w-7xl mx-auto pb-12">
         {/* Floating Notification */}
         <AnimatePresence>
           {notification && (
@@ -267,7 +267,7 @@ export default function DashboardMembersPage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${notification.type === "error"
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
                 ? "bg-red-600 border-red-500"
                 : "bg-emerald-600 border-emerald-500"
                 }`}
@@ -280,7 +280,7 @@ export default function DashboardMembersPage() {
               <div className="text-sm font-semibold">{notification.message}</div>
               <button
                 onClick={() => setNotification(null)}
-                className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+                className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -314,7 +314,7 @@ export default function DashboardMembersPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => handleOpenEditor()}
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-5 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
                 >
                   <FiPlus className="w-5 h-5" />
                   <span>Add Member</span>
@@ -322,7 +322,7 @@ export default function DashboardMembersPage() {
               </div>
 
               {/* Filtering & Search Bar */}
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
                 {/* Search */}
                 <div className="relative w-full md:max-w-xs">
                   <FiSearch className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500 w-5 h-5" />
@@ -331,14 +331,14 @@ export default function DashboardMembersPage() {
                     placeholder="Search members..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-[#4b0102] transition-all"
                   />
                 </div>
 
                 {/* Filters right side */}
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
                   {/* Role Buttons */}
-                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
+                  <div className="flex bg-gray-50 dark:bg-gray-900 p-1.5 rounded-lg border border-gray-100 dark:border-gray-800 overflow-x-auto max-w-full">
                     {["All", ...ROLES].map((r) => (
                       <button
                         key={r}
@@ -362,7 +362,7 @@ export default function DashboardMembersPage() {
                   <p className="text-gray-500 dark:text-gray-400 mt-4 text-sm font-semibold">Loading members...</p>
                 </div>
               ) : filteredMembers.length === 0 ? (
-                <div className="bg-white dark:bg-gray-800 rounded-3xl py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
+                <div className="bg-white dark:bg-gray-800 rounded-lg py-20 text-center border border-gray-100 dark:border-gray-700 shadow-sm">
                   <FiAlertCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">No Members Found</h3>
                   <p className="text-gray-500 dark:text-gray-400 mt-1 max-w-md mx-auto text-sm">
@@ -379,7 +379,7 @@ export default function DashboardMembersPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
+                        className="bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 group"
                       >
                         {/* Avatar Container */}
                         <div className="p-8 bg-gradient-to-br from-gray-50 dark:from-gray-900 to-white dark:to-gray-800">
@@ -446,7 +446,7 @@ export default function DashboardMembersPage() {
                             {/* View Details Link */}
                             <Link
                               href={`/dashboard/users/${member.id}`}
-                              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600 transition-all cursor-pointer"
+                              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600 transition-all cursor-pointer"
                             >
                               <FiUser className="w-4.5 h-4.5" />
                               <span>Details</span>
@@ -455,7 +455,7 @@ export default function DashboardMembersPage() {
                             {/* Edit Action */}
                             <button
                               onClick={() => handleOpenEditor(member)}
-                              className="px-3 py-2 rounded-xl text-xs font-bold bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-blue-950/30 dark:hover:text-blue-400 border border-slate-200/50 dark:border-gray-600 hover:border-blue-200/50 dark:hover:border-blue-900/50 transition-all cursor-pointer"
+                              className="px-3 py-2 rounded-lg text-xs font-bold bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-blue-950/30 dark:hover:text-blue-400 border border-slate-200/50 dark:border-gray-600 hover:border-blue-200/50 dark:hover:border-blue-900/50 transition-all cursor-pointer"
                             >
                               <FiEdit className="w-4.5 h-4.5" />
                             </button>
@@ -464,7 +464,7 @@ export default function DashboardMembersPage() {
                             <button
                               onClick={() => handleDeleteMember(member.id)}
                               disabled={member.id === user?.id}
-                              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${member.id === user?.id
+                              className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${member.id === user?.id
                                 ? "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50"
                                 : "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
                                 }`}
@@ -496,7 +496,7 @@ export default function DashboardMembersPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={handleCloseEditor}
-                  className="p-3 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
+                  className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white shadow-sm cursor-pointer transition-all hover:scale-105"
                 >
                   <FiArrowLeft className="w-5 h-5" />
                 </button>
@@ -514,7 +514,7 @@ export default function DashboardMembersPage() {
 
               {/* Form Element */}
               <form onSubmit={handleSaveMember} className="max-w-3xl">
-                <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
                   {/* Avatar Upload Section */}
                   <div className="space-y-4">
                     <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
@@ -553,7 +553,7 @@ export default function DashboardMembersPage() {
                           onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
                           onDrop={handleDrop}
                           onClick={() => fileInputRef.current?.click()}
-                          className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${dragActive
+                          className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${dragActive
                             ? "border-[#4b0102] bg-[#4b0102]/5"
                             : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
                             }`}
@@ -606,7 +606,7 @@ export default function DashboardMembersPage() {
                           placeholder="john@example.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                           required
                         />
                       </div>
@@ -624,7 +624,7 @@ export default function DashboardMembersPage() {
                           placeholder="+353 83 123 4567"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                         />
                       </div>
                     </div>
@@ -641,7 +641,7 @@ export default function DashboardMembersPage() {
                         <select
                           value={role}
                           onChange={(e) => setRole(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
                         >
                           {ROLES.map((r) => (
                             <option key={r} value={r} className="bg-white dark:bg-gray-800">
@@ -662,7 +662,7 @@ export default function DashboardMembersPage() {
                         <select
                           value={status}
                           onChange={(e) => setStatus(e.target.value)}
-                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
+                          className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent appearance-none cursor-pointer"
                         >
                           {["Active", "Inactive", "Pending"].map((s) => (
                             <option key={s} value={s} className="bg-white dark:bg-gray-800">
@@ -685,7 +685,7 @@ export default function DashboardMembersPage() {
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       rows={3}
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
                     />
                   </div>
 
@@ -694,13 +694,13 @@ export default function DashboardMembersPage() {
                     <button
                       type="button"
                       onClick={handleCloseEditor}
-                      className="px-6 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold transition-all cursor-pointer"
+                      className="px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-bold transition-all cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
                     >
                       {editingMember ? "Update Member" : "Add Member"}
                     </button>

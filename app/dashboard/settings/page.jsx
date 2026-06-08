@@ -196,7 +196,7 @@ export default function DashboardSiteSettingsPage() {
 
   return (
     <ProtectedRoute allowedRoles={["admin"]}>
-      <div className="space-y-8 max-w-5xl mx-auto pb-16">
+      <div className="space-y-8 w-full mx-auto pb-16">
         {/* Floating Notification */}
         <AnimatePresence>
           {notification && (
@@ -204,7 +204,7 @@ export default function DashboardSiteSettingsPage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${notification.type === "error"
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
                 ? "bg-red-600 border-red-500"
                 : "bg-emerald-600 border-emerald-500"
                 }`}
@@ -217,7 +217,7 @@ export default function DashboardSiteSettingsPage() {
               <div className="text-sm font-semibold">{notification.message}</div>
               <button
                 onClick={() => setNotification(null)}
-                className="ml-auto hover:bg-white/10 p-1 rounded-xl transition-all duration-150"
+                className="ml-auto hover:bg-white/10 p-1 rounded-lg transition-all duration-150"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -237,7 +237,7 @@ export default function DashboardSiteSettingsPage() {
           </div>
           <button
             onClick={handleSaveAll}
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
           >
             <FiSave className="w-5 h-5" />
             Save All Changes
@@ -245,13 +245,13 @@ export default function DashboardSiteSettingsPage() {
         </div>
 
         {/* Tabs Navigation */}
-        <div className="bg-white dark:bg-gray-800 rounded-3xl p-1 border border-gray-100 dark:border-gray-700 shadow-sm overflow-x-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-100 dark:border-gray-700 shadow-sm overflow-x-auto">
           <div className="flex gap-1 min-w-max">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${activeTab === tab.id
+                className={`flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${activeTab === tab.id
                   ? "bg-white dark:bg-gray-700 text-[#4b0102] dark:text-accent shadow-sm"
                   : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                   }`}
@@ -272,7 +272,7 @@ export default function DashboardSiteSettingsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-8"
+                className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-8"
               >
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Hero Banner Settings
@@ -284,7 +284,7 @@ export default function DashboardSiteSettingsPage() {
                     Background Image
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                    <div className="relative aspect-video rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700">
                       <img
                         src={tempSettings.hero.backgroundImage}
                         alt="Hero preview"
@@ -300,7 +300,7 @@ export default function DashboardSiteSettingsPage() {
                       }}
                       onDrop={(e) => handleDrop(e, "hero")}
                       onClick={() => heroImageInputRef.current?.click()}
-                      className={`h-full border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center ${dragActive === "hero"
+                      className={`h-full border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center ${dragActive === "hero"
                         ? "border-[#4b0102] bg-[#4b0102]/5"
                         : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
                         }`}
@@ -338,7 +338,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("hero", "title", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-lg font-bold text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-lg font-bold text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -353,7 +353,7 @@ export default function DashboardSiteSettingsPage() {
                         updateTempSection("hero", "subtitle", e.target.value)
                       }
                       rows={2}
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
                     />
                   </div>
 
@@ -368,7 +368,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("hero", "ctaPrimaryText", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -383,7 +383,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("hero", "ctaPrimaryLink", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -398,7 +398,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("hero", "ctaSecondaryText", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -413,7 +413,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("hero", "ctaSecondaryLink", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
                 </div>
@@ -426,7 +426,7 @@ export default function DashboardSiteSettingsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
+                className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
               >
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Site Metadata & SEO
@@ -444,7 +444,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("metadata", "siteTitle", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -459,7 +459,7 @@ export default function DashboardSiteSettingsPage() {
                         updateTempSection("metadata", "siteDescription", e.target.value)
                       }
                       rows={3}
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
                     />
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {tempSettings.metadata.siteDescription.length}/160 characters recommended
@@ -477,7 +477,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("metadata", "siteKeywords", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -487,7 +487,7 @@ export default function DashboardSiteSettingsPage() {
                       Open Graph Image
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                      <div className="relative aspect-video rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <div className="relative aspect-video rounded-lg overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                         <img
                           src={tempSettings.metadata.ogImage}
                           alt="OG preview"
@@ -503,7 +503,7 @@ export default function DashboardSiteSettingsPage() {
                         }}
                         onDrop={(e) => handleDrop(e, "og")}
                         onClick={() => ogImageInputRef.current?.click()}
-                        className={`h-full border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center ${dragActive === "og"
+                        className={`h-full border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center ${dragActive === "og"
                           ? "border-[#4b0102] bg-[#4b0102]/5"
                           : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
                           }`}
@@ -537,7 +537,7 @@ export default function DashboardSiteSettingsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-8"
+                className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-8"
               >
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Contact & Social Information
@@ -555,7 +555,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("contact", "email", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -570,7 +570,7 @@ export default function DashboardSiteSettingsPage() {
                       onChange={(e) =>
                         updateTempSection("contact", "phone", e.target.value)
                       }
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                     />
                   </div>
 
@@ -585,7 +585,7 @@ export default function DashboardSiteSettingsPage() {
                         updateTempSection("contact", "address", e.target.value)
                       }
                       rows={2}
-                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
+                      className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent resize-none"
                     />
                   </div>
                 </div>
@@ -609,7 +609,7 @@ export default function DashboardSiteSettingsPage() {
                             onChange={(e) =>
                               updateSocialLink(index, "url", e.target.value)
                             }
-                            className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                            className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                           />
                         </div>
                       </div>
@@ -625,7 +625,7 @@ export default function DashboardSiteSettingsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
+                className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
               >
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Footer Settings
@@ -642,7 +642,7 @@ export default function DashboardSiteSettingsPage() {
                     onChange={(e) =>
                       updateTempSection("footer", "copyrightText", e.target.value)
                     }
-                    className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                    className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                   />
                 </div>
               </motion.div>
@@ -654,7 +654,7 @@ export default function DashboardSiteSettingsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
+                className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6"
               >
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Site Appearance
@@ -667,7 +667,7 @@ export default function DashboardSiteSettingsPage() {
                     </label>
                     <div className="flex items-center gap-4">
                       <div
-                        className="w-12 h-12 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
+                        className="w-12 h-12 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700"
                         style={{ backgroundColor: tempSettings.appearance.primaryColor }}
                       />
                       <input
@@ -676,12 +676,12 @@ export default function DashboardSiteSettingsPage() {
                         onChange={(e) =>
                           updateTempSection("appearance", "primaryColor", e.target.value)
                         }
-                        className="w-full h-12 cursor-pointer rounded-2xl border border-gray-200 dark:border-gray-700"
+                        className="w-full h-12 cursor-pointer rounded-lg border border-gray-200 dark:border-gray-700"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl">
+                  <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg">
                     <div>
                       <p className="text-sm font-bold text-gray-900 dark:text-white">
                         Enable Dark Mode
@@ -722,7 +722,7 @@ export default function DashboardSiteSettingsPage() {
         <div className="md:hidden fixed bottom-6 left-6 right-6 z-40">
           <button
             onClick={handleSaveAll}
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3.5 rounded-2xl font-bold shadow-lg shadow-primary/30 transition-all cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3.5 rounded-lg font-bold shadow-lg shadow-primary/30 transition-all cursor-pointer"
           >
             <FiSave className="w-5 h-5" />
             Save All Changes

@@ -94,7 +94,7 @@ export default function PortfolioPage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
             {/* Sidebar filters — desktop */}
             <aside className="hidden w-56 shrink-0 lg:block">
-              <div className="sticky top-8">
+              <div className="sticky top-32">
                 <p className="text-xs font-black uppercase text-[#4b0102]">{meta.categoriesHeading}</p>
                 <ul className="mt-3 space-y-1">
                   {categoryKeys.map((key) => (

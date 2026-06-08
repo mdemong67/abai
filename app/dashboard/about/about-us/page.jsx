@@ -140,7 +140,7 @@ export default function AboutUsPage() {
 
   return (
     <ProtectedRoute allowedRoles={["admin"]}>
-      <div className="max-w-5xl mx-auto pb-16 space-y-8">
+      <div className="w-full mx-auto pb-16 space-y-5">
         {/* Notification */}
         <AnimatePresence>
           {notification && (
@@ -148,14 +148,14 @@ export default function AboutUsPage() {
               initial={{ opacity: 0, y: -50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border text-white max-w-md ${notification.type === "error"
+              className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
                 ? "bg-red-600 border-red-500"
                 : "bg-emerald-600 border-emerald-500"
                 }`}
             >
               {notification.type === "error" ? <FiAlertCircle /> : <FiCheckCircle />}
               <span className="text-sm font-semibold">{notification.message}</span>
-              <button onClick={() => setNotification(null)} className="ml-auto hover:bg-white/10 p-1 rounded-xl">
+              <button onClick={() => setNotification(null)} className="ml-auto hover:bg-white/10 p-1 rounded-lg">
                 <FiX />
               </button>
             </motion.div>
@@ -165,7 +165,7 @@ export default function AboutUsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-[#4b0102]/10 text-[#4b0102]">
+            <div className="p-3 rounded-lg bg-[#4b0102]/10 text-[#4b0102]">
               <FiFileText className="w-6 h-6" />
             </div>
             <div>
@@ -175,7 +175,7 @@ export default function AboutUsPage() {
           </div>
           <button
             onClick={handleSave}
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-2xl font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3 rounded-lg font-bold shadow-md shadow-primary/20 transition-all cursor-pointer"
           >
             <FiSave className="w-5 h-5" />
             Save Changes
@@ -183,14 +183,14 @@ export default function AboutUsPage() {
         </div>
 
         {/* Content Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {/* Left Column: Image */}
           <div className="space-y-6">
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm">
               <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block mb-4">
                 About Image
               </label>
-              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 mb-4">
+              <div className="relative aspect-video rounded-lg overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 mb-4">
                 <img src={tempData.image} alt="About preview" className="w-full h-full object-cover" />
               </div>
               <div
@@ -210,7 +210,7 @@ export default function AboutUsPage() {
                 }}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all ${dragActive
+                className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all ${dragActive
                   ? "border-[#4b0102] bg-[#4b0102]/5"
                   : "border-gray-200 dark:border-gray-700 hover:border-[#4b0102] hover:bg-[#4b0102]/5 dark:hover:bg-gray-700"
                   }`}
@@ -233,7 +233,7 @@ export default function AboutUsPage() {
 
           {/* Right Column: Text Content */}
           <div className="space-y-6">
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
               <div className="space-y-2">
                 <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500 block">
                   Title
@@ -242,7 +242,7 @@ export default function AboutUsPage() {
                   type="text"
                   value={tempData.title}
                   onChange={(e) => setTempData({ ...tempData, title: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-2xl px-4 py-3 text-lg font-bold text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
+                  className="w-full bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-700 rounded-lg px-4 py-3 text-lg font-bold text-gray-800 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:focus:border-accent"
                   placeholder="About ABAI"
                 />
               </div>
@@ -258,7 +258,7 @@ export default function AboutUsPage() {
                   </span>
                 </div>
 
-                <div className="border border-slate-200 dark:border-gray-700 rounded-3xl overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
+                <div className="border border-slate-200 dark:border-gray-700 rounded-lg overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
                   {/* Formatted Toolbar */}
                   <div className="bg-slate-50 dark:bg-gray-900/80 px-4 py-3 border-b border-slate-200 dark:border-gray-700 flex flex-wrap items-center gap-1.5">
                     {[
@@ -270,7 +270,7 @@ export default function AboutUsPage() {
                         key={btn.type}
                         type="button"
                         onClick={() => applyFormat(btn.type)}
-                        className="p-2 text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                        className="p-2 text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                         title={btn.tooltip}
                       >
                         <btn.icon className="w-4 h-4" />
@@ -287,7 +287,7 @@ export default function AboutUsPage() {
                         key={btn.type}
                         type="button"
                         onClick={() => applyFormat(btn.type)}
-                        className="p-2 text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-xl cursor-pointer transition-colors relative group/tool"
+                        className="p-2 text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
                         title={btn.tooltip}
                       >
                         <btn.icon className="w-4 h-4" />
@@ -318,7 +318,7 @@ export default function AboutUsPage() {
         <div className="md:hidden fixed bottom-6 left-6 right-6 z-40">
           <button
             onClick={handleSave}
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3.5 rounded-2xl font-bold shadow-lg shadow-primary/30 transition-all cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4b0102] to-[#6b1c23] hover:from-[#6b1c23] hover:to-[#8b2c33] text-white px-6 py-3.5 rounded-lg font-bold shadow-lg shadow-primary/30 transition-all cursor-pointer"
           >
             <FiSave className="w-5 h-5" />
             Save Changes

@@ -33,7 +33,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="hidden grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
           <div>
             <p className="text-lg sm:text-xl lg:text-2xl font-semibold uppercase text-[#c89675]">{n.about}</p>

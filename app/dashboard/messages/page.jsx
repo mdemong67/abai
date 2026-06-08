@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default function DashboardMessagesPage() {
   return (
     <ProtectedRoute>
-      <div className="space-y-6">
+      <div className="space-y-5">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           Messages
         </h1>
