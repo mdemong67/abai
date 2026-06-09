@@ -2,6 +2,8 @@
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/components/providers/AuthProvider";
+import { useSite } from "@/components/providers/SiteProvider";
+import { nav } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,11 +14,14 @@ import {
   FiCalendar,
   FiChevronDown,
   FiFileText,
+  FiGlobe,
   FiHome,
   FiImage,
   FiLogOut,
   FiMenu,
+  FiMoon,
   FiSettings,
+  FiSun,
   FiUser,
   FiUsers,
   FiX
@@ -98,6 +103,7 @@ function NestedNavItem({ item, sidebarOpen, setSidebarOpen }) {
 
 export default function DashboardLayout({ children }) {
   const { user, signOut } = useAuth();
+  const { language, toggleLanguage, dark, setDark } = useSite();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -214,6 +220,28 @@ export default function DashboardLayout({ children }) {
           <header className="sticky top-0 z-30 h-20 px-6 flex items-center justify-between bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
             <div className="flex-1"></div>
             <div className="flex items-center gap-4">
+              {/* Language Switcher */}
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                className="inline-flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-bold text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-100 dark:hover:bg-gray-700/60 transition-colors cursor-pointer border border-transparent hover:border-gray-200 dark:hover:border-gray-600"
+                aria-label="Toggle language"
+              >
+                <FiGlobe className="w-4 h-4 text-[#4b0102] dark:text-[#9fc3ff]" />
+                <span>{nav[language].langLabel}</span>
+              </button>
+
+              {/* Theme Switcher */}
+              <button
+                type="button"
+                onClick={() => setDark(!dark)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl text-gray-600 dark:text-gray-300 hover:text-[#4b0102] dark:hover:text-white hover:bg-slate-100 dark:hover:bg-gray-700/60 transition-colors cursor-pointer border border-transparent hover:border-gray-200 dark:hover:border-gray-600"
+                aria-label="Toggle dark mode"
+              >
+                {dark ? <FiSun className="w-4 h-4 text-amber-500" /> : <FiMoon className="w-4 h-4 text-indigo-500" />}
+              </button>
+
+              {/* User Dropdown */}
               <div
                 className="relative group"
                 onMouseEnter={() => setUserMenuOpen(true)}

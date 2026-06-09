@@ -2,29 +2,48 @@
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/components/providers/AuthProvider";
+import RichTextEditor from "@/components/RichTextEditor";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
   FiAlertCircle,
   FiArrowLeft,
-  FiBold,
   FiCalendar,
   FiCheckCircle,
   FiEdit,
   FiImage,
-  FiItalic,
-  FiLink,
-  FiList,
   FiLock,
   FiPlus,
   FiSearch,
   FiTag,
   FiTrash2,
-  FiUnderline,
   FiUploadCloud,
   FiUser,
   FiX
 } from "react-icons/fi";
+
+function getPlainTextFromLexicalJson(jsonString) {
+  if (!jsonString) return "";
+  if (typeof jsonString !== "string" || !jsonString.startsWith("{")) return jsonString;
+  try {
+    const obj = JSON.parse(jsonString);
+    let text = "";
+    const extract = (node) => {
+      if (node.text) {
+        text += node.text;
+      }
+      if (node.children) {
+        node.children.forEach(extract);
+      }
+    };
+    if (obj.root) {
+      extract(obj.root);
+    }
+    return text;
+  } catch (e) {
+    return jsonString;
+  }
+}
 
 // Default seed news if localStorage is empty
 const SEED_NEWS = [
@@ -100,7 +119,6 @@ export default function DashboardNewsPage() {
   const [dragActive, setDragActive] = useState(false);
 
   const fileInputRef = useRef(null);
-  const textareaRef = useRef(null);
 
   // Load news from localStorage on mount
   useEffect(() => {
@@ -267,62 +285,7 @@ export default function DashboardNewsPage() {
     }
   };
 
-  // Format description mockup
-  const applyFormat = (formatType) => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-    const selectedText = text.substring(start, end);
-
-    let replacement = "";
-    switch (formatType) {
-      case "bold":
-        replacement = `**${selectedText || "bold text"}**`;
-        break;
-      case "italic":
-        replacement = `*${selectedText || "italic text"}*`;
-        break;
-      case "underline":
-        replacement = `<u>${selectedText || "underlined text"}</u>`;
-        break;
-      case "bullet":
-        replacement = selectedText
-          ? selectedText
-            .split("\n")
-            .map((line) => `- ${line}`)
-            .join("\n")
-          : "- List item";
-        break;
-      case "number":
-        replacement = selectedText
-          ? selectedText
-            .split("\n")
-            .map((line, i) => `${i + 1}. ${line}`)
-            .join("\n")
-          : "1. List item";
-        break;
-      case "link":
-        replacement = `[${selectedText || "link text"}](https://example.com)`;
-        break;
-      case "image":
-        replacement = `![${selectedText || "image description"}](https://images.unsplash.com/photo-1542838132-92c53300491e)`;
-        break;
-      default:
-        return;
-    }
-
-    const newValue = text.substring(0, start) + replacement + text.substring(end);
-    setDescription(newValue);
-
-    setTimeout(() => {
-      textarea.focus();
-      const newCursorPos = start + replacement.length;
-      textarea.setSelectionRange(newCursorPos, newCursorPos);
-    }, 50);
-  };
 
   // Submit News Form
   const handleSaveNews = (e) => {
@@ -379,11 +342,11 @@ export default function DashboardNewsPage() {
     setIsEditorOpen(false);
   };
 
-  // Filter lists
   const filteredNews = news.filter((item) => {
+    const plainTextDesc = getPlainTextFromLexicalJson(item.description);
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      plainTextDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory =
@@ -405,8 +368,8 @@ export default function DashboardNewsPage() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-lg shadow-2xl border text-white max-w-md ${notification.type === "error"
-                  ? "bg-red-600 border-red-500"
-                  : "bg-emerald-600 border-emerald-500"
+                ? "bg-red-600 border-red-500"
+                : "bg-emerald-600 border-emerald-500"
                 }`}
             >
               {notification.type === "error" ? (
@@ -481,8 +444,8 @@ export default function DashboardNewsPage() {
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
                         className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${selectedCategory === cat
-                            ? "bg-white dark:bg-gray-800 text-primary dark:text-white shadow-sm"
-                            : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                          ? "bg-white dark:bg-gray-800 text-primary dark:text-white shadow-sm"
+                          : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                           }`}
                       >
                         {cat}
@@ -612,8 +575,8 @@ export default function DashboardNewsPage() {
                               onClick={() => handleOpenEditor(item)}
                               disabled={!editable}
                               className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${editable
-                                  ? "bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600"
-                                  : "bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border border-gray-200/20 cursor-not-allowed opacity-50 relative group/tooltip"
+                                ? "bg-slate-50 hover:bg-primary/5 text-slate-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white border border-slate-200/50 dark:border-gray-600"
+                                : "bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border border-gray-200/20 cursor-not-allowed opacity-50 relative group/tooltip"
                                 }`}
                             >
                               {editable ? (
@@ -637,8 +600,8 @@ export default function DashboardNewsPage() {
                               onClick={() => handleDeleteNews(item.id)}
                               disabled={!deletable}
                               className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center justify-center ${deletable
-                                  ? "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
-                                  : "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50 relative group/tooltip"
+                                ? "border-red-200 bg-red-50 text-red-600 hover:bg-red-100 hover:border-red-300 dark:bg-red-950/20 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
+                                : "border-gray-200/20 bg-gray-100 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50 relative group/tooltip"
                                 }`}
                               title={deletable ? "Delete news" : "Delete locked"}
                             >
@@ -693,7 +656,7 @@ export default function DashboardNewsPage() {
               </div>
 
               {/* Form Element */}
-              <form onSubmit={handleSaveNews} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <form onSubmit={handleSaveNews} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 {/* LEFT SIDE (Main Content - 65% width approx) */}
                 <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
                   {/* News Title Input */}
@@ -794,68 +757,22 @@ export default function DashboardNewsPage() {
                     </div>
                   </div>
 
-                  {/* Rich Text Editor Mockup Container */}
+                  {/* Rich Text Editor Container */}
                   <div className="space-y-2 pt-2 flex flex-col">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500">
                         News Content
                       </label>
                       <span className="text-[0.65rem] text-gray-400 font-bold">
-                        {description.length} chars | {description.split(/\s+/).filter(Boolean).length} words
+                        {getPlainTextFromLexicalJson(description).length} chars | {getPlainTextFromLexicalJson(description).split(/\s+/).filter(Boolean).length} words
                       </span>
                     </div>
 
-                    <div className="border border-slate-200 dark:border-gray-700 rounded-lg overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
-                      {/* Formatted Toolbar */}
-                      <div className="bg-slate-50 dark:bg-gray-900/80 px-4 py-3 border-b border-slate-200 dark:border-gray-700 flex flex-wrap items-center gap-1.5">
-                        {[
-                          { type: "bold", icon: FiBold, tooltip: "Bold" },
-                          { type: "italic", icon: FiItalic, tooltip: "Italic" },
-                          { type: "underline", icon: FiUnderline, tooltip: "Underline" },
-                        ].map((btn) => (
-                          <button
-                            key={btn.type}
-                            type="button"
-                            onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
-                            title={btn.tooltip}
-                          >
-                            <btn.icon className="w-4 h-4" />
-                          </button>
-                        ))}
-                        <div className="w-px h-5 bg-slate-200 dark:bg-gray-700 mx-1" />
-                        {[
-                          { type: "bullet", icon: FiList, tooltip: "Bullet List" },
-                          { type: "number", icon: FiList, tooltip: "Numbered List" },
-                          { type: "link", icon: FiLink, tooltip: "Insert Link" },
-                          { type: "image", icon: FiImage, tooltip: "Insert Image URL" },
-                        ].map((btn) => (
-                          <button
-                            key={btn.type}
-                            type="button"
-                            onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
-                            title={btn.tooltip}
-                          >
-                            <btn.icon className="w-4 h-4" />
-                            {btn.type === "number" && (
-                              <span className="absolute top-1 right-1 text-[0.65rem] font-black scale-75">1.</span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* Stateful Editor Textarea */}
-                      <textarea
-                        ref={textareaRef}
-                        placeholder="Write your news content here. You can use the formatting toolbar above to insert markdown helpers directly into your selection..."
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        rows={12}
-                        className="w-full bg-transparent px-5 py-4 text-sm text-gray-800 dark:text-gray-200 outline-none placeholder-gray-400 dark:placeholder-gray-500 resize-y min-h-[200px] leading-relaxed"
-                        required
-                      />
-                    </div>
+                    <RichTextEditor
+                      key={editingNews ? editingNews.id : "new"}
+                      value={description}
+                      onChange={setDescription}
+                    />
                   </div>
                 </div>
 
@@ -888,8 +805,8 @@ export default function DashboardNewsPage() {
                         onDrop={handleDrop}
                         onClick={() => fileInputRef.current?.click()}
                         className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all cursor-pointer ${dragActive
-                            ? "border-primary bg-primary/5"
-                            : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-gray-50 dark:bg-gray-900/50"
+                          ? "border-primary bg-primary/5"
+                          : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-gray-50 dark:bg-gray-900/50"
                           }`}
                       >
                         <input

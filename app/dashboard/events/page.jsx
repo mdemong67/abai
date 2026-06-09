@@ -2,30 +2,49 @@
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/components/providers/AuthProvider";
+import RichTextEditor from "@/components/RichTextEditor";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
   FiAlertCircle,
   FiArrowLeft,
-  FiBold,
   FiCalendar,
   FiCheckCircle,
   FiEdit,
   FiImage,
-  FiItalic,
-  FiLink,
-  FiList,
   FiLock,
   FiMapPin,
   FiPlus,
   FiSearch,
   FiTag,
   FiTrash2,
-  FiUnderline,
   FiUploadCloud,
   FiUser,
   FiX
 } from "react-icons/fi";
+
+function getPlainTextFromLexicalJson(jsonString) {
+  if (!jsonString) return "";
+  if (typeof jsonString !== "string" || !jsonString.startsWith("{")) return jsonString;
+  try {
+    const obj = JSON.parse(jsonString);
+    let text = "";
+    const extract = (node) => {
+      if (node.text) {
+        text += node.text;
+      }
+      if (node.children) {
+        node.children.forEach(extract);
+      }
+    };
+    if (obj.root) {
+      extract(obj.root);
+    }
+    return text;
+  } catch (e) {
+    return jsonString;
+  }
+}
 
 // Default seed events if localStorage is empty
 const SEED_EVENTS = [
@@ -105,7 +124,6 @@ export default function DashboardEventsPage() {
   const [dragActive, setDragActive] = useState(false);
 
   const fileInputRef = useRef(null);
-  const textareaRef = useRef(null);
 
   // Load events from localStorage on mount
   useEffect(() => {
@@ -274,62 +292,7 @@ export default function DashboardEventsPage() {
     }
   };
 
-  // Format description mockup
-  const applyFormat = (formatType) => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-    const selectedText = text.substring(start, end);
-
-    let replacement = "";
-    switch (formatType) {
-      case "bold":
-        replacement = `**${selectedText || "bold text"}**`;
-        break;
-      case "italic":
-        replacement = `*${selectedText || "italic text"}*`;
-        break;
-      case "underline":
-        replacement = `<u>${selectedText || "underlined text"}</u>`;
-        break;
-      case "bullet":
-        replacement = selectedText
-          ? selectedText
-            .split("\n")
-            .map((line) => `- ${line}`)
-            .join("\n")
-          : "- List item";
-        break;
-      case "number":
-        replacement = selectedText
-          ? selectedText
-            .split("\n")
-            .map((line, i) => `${i + 1}. ${line}`)
-            .join("\n")
-          : "1. List item";
-        break;
-      case "link":
-        replacement = `[${selectedText || "link text"}](https://example.com)`;
-        break;
-      case "image":
-        replacement = `![${selectedText || "image description"}](https://images.unsplash.com/photo-1542838132-92c53300491e)`;
-        break;
-      default:
-        return;
-    }
-
-    const newValue = text.substring(0, start) + replacement + text.substring(end);
-    setDescription(newValue);
-
-    setTimeout(() => {
-      textarea.focus();
-      const newCursorPos = start + replacement.length;
-      textarea.setSelectionRange(newCursorPos, newCursorPos);
-    }, 50);
-  };
 
   // Submit Event Form
   const handleSaveEvent = (event) => {
@@ -395,9 +358,10 @@ export default function DashboardEventsPage() {
 
   // Filter lists
   const filteredEvents = events.filter((event) => {
+    const plainTextDesc = getPlainTextFromLexicalJson(event.description);
     const matchesSearch =
       event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      plainTextDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.category.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory =
@@ -713,7 +677,7 @@ export default function DashboardEventsPage() {
               </div>
 
               {/* Form Element */}
-              <form onSubmit={handleSaveEvent} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <form onSubmit={handleSaveEvent} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
                 {/* LEFT SIDE (Main Content - 65% width approx) */}
                 <div className="lg:col-span-8 bg-white dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
@@ -839,68 +803,22 @@ export default function DashboardEventsPage() {
                     </div>
                   </div>
 
-                  {/* Rich Text Editor Mockup Container */}
+                  {/* Rich Text Editor Container */}
                   <div className="space-y-2 pt-2 flex flex-col">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase font-black tracking-wider text-gray-400 dark:text-gray-500">
                         Event Description
                       </label>
                       <span className="text-[10px] text-gray-400 font-bold">
-                        {description.length} chars | {description.split(/\s+/).filter(Boolean).length} words
+                        {getPlainTextFromLexicalJson(description).length} chars | {getPlainTextFromLexicalJson(description).split(/\s+/).filter(Boolean).length} words
                       </span>
                     </div>
 
-                    <div className="border border-slate-200 dark:border-gray-700 rounded-lg overflow-hidden flex flex-col focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary dark:focus-within:border-accent bg-transparent">
-                      {/* Formatted Toolbar */}
-                      <div className="bg-slate-50 dark:bg-gray-900/80 px-4 py-3 border-b border-slate-200 dark:border-gray-700 flex flex-wrap items-center gap-1.5">
-                        {[
-                          { type: "bold", icon: FiBold, tooltip: "Bold" },
-                          { type: "italic", icon: FiItalic, tooltip: "Italic" },
-                          { type: "underline", icon: FiUnderline, tooltip: "Underline" },
-                        ].map((btn) => (
-                          <button
-                            key={btn.type}
-                            type="button"
-                            onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
-                            title={btn.tooltip}
-                          >
-                            <btn.icon className="w-4 h-4" />
-                          </button>
-                        ))}
-                        <div className="w-px h-5 bg-slate-200 dark:bg-gray-700 mx-1" />
-                        {[
-                          { type: "bullet", icon: FiList, tooltip: "Bullet List" },
-                          { type: "number", icon: FiList, tooltip: "Numbered List" },
-                          { type: "link", icon: FiLink, tooltip: "Insert Link" },
-                          { type: "image", icon: FiImage, tooltip: "Insert Image URL" },
-                        ].map((btn) => (
-                          <button
-                            key={btn.type}
-                            type="button"
-                            onClick={() => applyFormat(btn.type)}
-                            className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors relative group/tool"
-                            title={btn.tooltip}
-                          >
-                            <btn.icon className="w-4 h-4" />
-                            {btn.type === "number" && (
-                              <span className="absolute top-1 right-1 text-[8px] font-black scale-75">1.</span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* Stateful Editor Textarea */}
-                      <textarea
-                        ref={textareaRef}
-                        placeholder="Write your event details here. You can use the formatting toolbar above to insert markdown helpers (like Bold, Italic, lists and links) directly into your selection..."
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        rows={12}
-                        className="w-full bg-transparent px-5 py-4 text-sm text-gray-800 dark:text-gray-200 outline-none placeholder-gray-400 dark:placeholder-gray-500 resize-y min-h-[200px] leading-relaxed"
-                        required
-                      />
-                    </div>
+                    <RichTextEditor
+                      key={editingEvent ? editingEvent.id : "new"}
+                      value={description}
+                      onChange={setDescription}
+                    />
                   </div>
                 </div>
 
