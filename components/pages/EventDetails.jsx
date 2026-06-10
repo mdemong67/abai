@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FiCalendar, FiMapPin, FiArrowLeft } from "react-icons/fi";
+import { FiCalendar, FiMapPin, FiArrowLeft, FiImage } from "react-icons/fi";
 import PageShell from "@/components/layout/PageShell";
 import { useSite } from "@/components/providers/SiteProvider";
 import {
@@ -71,6 +71,12 @@ export default function EventDetails({ id }) {
                 {location}
               </span>
               <span>{event.year}</span>
+              {event.photoCount && (
+                <span className="flex items-center gap-1">
+                  <FiImage className="h-4 w-4 text-[#62e69f]" />
+                  {event.photoCount} {lang === "bn" ? "ছবি" : "photos"}
+                </span>
+              )}
             </div>
           </div>
 
@@ -102,6 +108,13 @@ export default function EventDetails({ id }) {
             <p className="mb-4 leading-relaxed text-[#424a48] dark:text-white/80">
               {description}
             </p>
+            {event.photoCount && (
+              <p className="mb-4 leading-relaxed text-[#424a48] dark:text-white/80">
+                {lang === "bn"
+                  ? `এই ইভেন্টটিতে ঘটনার সারমর্ম ধারণকারী ${event.photoCount}টি ছবি রয়েছে। প্রতিটি ছবি আয়ারল্যান্ডে বাংলাদেশি সম্প্রদায়ের ঐতিহ্য ও উদযাপনের গল্প বলে।`
+                  : `This event contains ${event.photoCount} photographs capturing the essence of the event. Each photo tells a story of community, culture, and celebration in Ireland.`}
+              </p>
+            )}
           </div>
 
           {/* Back link */}
