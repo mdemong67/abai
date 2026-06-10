@@ -54,7 +54,7 @@ export default function SiteFooter() {
           <div>
             <p className="text-lg sm:text-xl lg:text-2xl font-semibold uppercase text-[#c89675]">{n.services}</p>
             <ul className="mt-3 space-y-2">
-              {n.servicesItems.slice(0, 4).map((item) => (
+              {n.servicesItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -71,7 +71,7 @@ export default function SiteFooter() {
           <div>
             <p className="text-lg sm:text-xl lg:text-2xl font-semibold uppercase text-[#c89675]">{n.services}</p>
             <ul className="mt-3 space-y-2">
-              {n.servicesItems.slice(0, 4).map((item) => (
+              {n.servicesItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

@@ -10,9 +10,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
+  FiActivity,
   FiBook,
   FiCalendar,
   FiChevronDown,
+  FiDollarSign,
   FiFileText,
   FiGlobe,
   FiHome,
@@ -30,11 +32,6 @@ import {
 const SIDEBAR_ITEMS = {
   admin: [
     { label: "Dashboard", href: "/dashboard", icon: FiHome },
-    { label: "Members", href: "/dashboard/users", icon: FiUsers },
-    { label: "Events", href: "/dashboard/events", icon: FiCalendar },
-    { label: "News", href: "/dashboard/news", icon: FiFileText },
-    { label: "Blog", href: "/dashboard/blog", icon: FiImage },
-    { label: "Portfolio", href: "/dashboard/portfolio", icon: FiImage },
     {
       label: "About",
       icon: FiBook,
@@ -45,6 +42,13 @@ const SIDEBAR_ITEMS = {
         { label: "Executive Committee", href: "/dashboard/about/executive-committee", icon: FiUsers },
       ],
     },
+    { label: "Members", href: "/dashboard/users", icon: FiUsers },
+    { label: "Events", href: "/dashboard/events", icon: FiCalendar },
+    { label: "News", href: "/dashboard/news", icon: FiFileText },
+    { label: "Blog", href: "/dashboard/blog", icon: FiImage },
+    { label: "Portfolio", href: "/dashboard/portfolio", icon: FiImage },
+    { label: "Donation History", href: "/dashboard/donations", icon: FiDollarSign },
+    { label: "Audit Logs", href: "/dashboard/audit-logs", icon: FiActivity },
     { label: "Profile", href: "/dashboard/profile", icon: FiUser },
     { label: "Site Settings", href: "/dashboard/settings", icon: FiSettings },
   ],

@@ -18,6 +18,7 @@ import {
   FiCalendar,
   FiFilter,
   FiGrid,
+  FiImage,
   FiLayers,
   FiMapPin,
   FiPlay,
@@ -401,10 +402,18 @@ function EventCard({ event, lang, cats, meta, large = false, index }) {
             {event.description[lang]}
           </p>
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-xs font-bold text-[#65716d] dark:text-white/50">
-              <FiCalendar className="mr-1 inline text-[#4b0102]" />
-              {event.date[lang]}
-            </span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-xs font-bold text-[#65716d] dark:text-white/50">
+                <FiCalendar className="mr-1 inline text-[#4b0102]" />
+                {event.date[lang]}
+              </span>
+              {event.photoCount && (
+                <span className="text-xs font-bold text-[#65716d] dark:text-white/50">
+                  <FiImage className="mr-1 inline text-[#4b0102]" />
+                  {event.photoCount} {lang === "bn" ? "ছবি" : "photos"}
+                </span>
+              )}
+            </div>
             <span className="text-xs font-black text-[#4b0102] group-hover:underline">
               {meta.viewEvent} →
             </span>
