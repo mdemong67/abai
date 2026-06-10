@@ -634,7 +634,7 @@ function QuickLinks({ language }) {
 
 function Contact({ t, language }) {
   return (
-    <section id="contact" className="px-4 py-10 sm:px-6 lg:py-14 bg-[#c89675] text-white">
+    <section id="contact" className="px-4 py-10 sm:px-6 lg:py-14 bg-gray-100 dark:bg-black text-black dark:text-white">
       <div className="mx-auto max-w-xl text-center">
         <h2 className="text-lg md:text-xl lg:text-4xl font-semibold mb-8">
           {language === "bn"

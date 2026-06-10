@@ -7,21 +7,17 @@ import {
   categoryAccent,
   categoryKeys,
   portfolioAlbums,
-  portfolioMeta,
-  portfolioYears,
+  portfolioMeta
 } from "@/lib/portfolio-data";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
-  FiFilter,
   FiGrid,
   FiImage,
-  FiLayers,
   FiMapPin,
-  FiPlay,
-  FiSearch,
+  FiPlay
 } from "react-icons/fi";
 
 export default function PortfolioPage() {
@@ -34,6 +30,7 @@ export default function PortfolioPage() {
   const [year, setYear] = useState("all");
   const [query, setQuery] = useState("");
   const [mobileFilters, setMobileFilters] = useState(false);
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -62,182 +59,65 @@ export default function PortfolioPage() {
 
   return (
     <PageShell>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[#071c17] px-4 py-14 text-white sm:px-6 sm:py-20">
-        <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-[#4b0102]/25 blur-3xl" />
-        <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#009b5a]/20 blur-3xl" />
-        <div className="relative mx-auto mycontainer">
-          <p className="text-sm font-black uppercase tracking-wider text-[#62e69f]">ABAI</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-            {meta.title}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg font-medium leading-8 text-white/75">
-            {meta.intro}
-          </p>
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {meta.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-white/12 bg-white/8 p-4 backdrop-blur-md"
+
+
+      {/* Main Content & Gallery */}
+      <section className="bg-[#fbfbf9] dark:bg-[#070b09] px-4 py-12 sm:px-6 lg:py-16">
+        <div className="mx-auto mycontainer space-y-10">
+
+          {/* Mobile Filter Panel drawer */}
+          <AnimatePresence>
+            {mobileFilters && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden rounded-3xl border border-black/5 bg-white p-5 shadow-xl dark:border-white/5 dark:bg-[#0e1411] lg:hidden"
               >
-                <p className="text-2xl font-black text-[#7eb8ff] sm:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-xs font-bold text-white/65">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main gallery workspace */}
-      <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto mycontainer">
-          <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
-            {/* Sidebar filters — desktop */}
-            <aside className="hidden w-56 shrink-0 lg:block">
-              <div className="sticky top-32">
-                <p className="text-xs font-black uppercase text-[#4b0102]">{meta.categoriesHeading}</p>
-                <ul className="mt-3 space-y-1">
+                <p className="text-xs font-black uppercase text-gray-400 dark:text-white/40">{meta.categoriesHeading}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
                   {categoryKeys.map((key) => (
-                    <li key={key}>
-                      <button
-                        type="button"
-                        onClick={() => setCategory(key)}
-                        className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-bold transition-colors ${category === key
-                          ? "bg-[#4b0102] text-white"
-                          : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
-                          }`}
-                      >
-                        {cats[key]}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="mt-8 text-xs font-black uppercase text-[#4b0102]">{meta.yearsHeading}</p>
-                <ul className="mt-3 max-h-48 space-y-1 overflow-y-auto">
-                  <li>
                     <button
+                      key={key}
                       type="button"
-                      onClick={() => setYear("all")}
-                      className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${year === "all"
-                        ? "bg-[#009b5a] text-white"
-                        : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
+                      onClick={() => setCategory(key)}
+                      className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${category === key
+                        ? "bg-[#4b0102] text-white dark:bg-[#62e69f] dark:text-black"
+                        : "bg-gray-100 text-gray-600 dark:bg-white/[0.04] dark:text-white/70"
                         }`}
                     >
-                      {meta.filterAll}
+                      {cats[key]}
                     </button>
-                  </li>
-                  {portfolioYears.map((y) => (
-                    <li key={y}>
-                      <button
-                        type="button"
-                        onClick={() => setYear(String(y))}
-                        className={`w-full rounded-lg px-3 py-2 text-left text-sm font-bold ${year === String(y)
-                          ? "bg-[#009b5a] text-white"
-                          : "text-[#424a48] hover:bg-[#eef5f1] dark:text-white/75 dark:hover:bg-white/10"
-                          }`}
-                      >
-                        {y}
-                      </button>
-                    </li>
                   ))}
-                </ul>
-              </div>
-            </aside>
-
-            <div className="min-w-0 flex-1">
-              {/* Toolbar */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="relative flex-1">
-                  <FiSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#4b0102]" />
-                  <input
-                    type="search"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder={meta.searchPlaceholder}
-                    className="h-12 w-full rounded-lg border border-black/10 bg-white pl-11 pr-4 text-sm font-semibold outline-none focus:border-[#4b0102] focus:ring-2 focus:ring-[#4b0102]/20 dark:border-white/10 dark:bg-[#101615] dark:text-white"
-                  />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setMobileFilters(!mobileFilters)}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-black/10 bg-white px-4 text-sm font-black text-[#4b0102] lg:hidden dark:border-white/10 dark:bg-[#101615]"
-                >
-                  <FiFilter />
-                  {cats[category]} {year !== "all" ? `· ${year}` : ""}
-                </button>
-                <p className="text-sm font-bold text-[#65716d] dark:text-white/60">
-                  <FiLayers className="mr-1 inline" />
-                  {filtered.length} {meta.photoGallery.toLowerCase()}
-                </p>
-              </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-              {/* Mobile filters panel */}
-              <AnimatePresence>
-                {mobileFilters && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="mt-3 overflow-hidden rounded-lg border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-[#101615] lg:hidden"
-                  >
-                    <p className="text-xs font-black uppercase text-[#4b0102]">{meta.categoriesHeading}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {categoryKeys.map((key) => (
-                        <button
-                          key={key}
-                          type="button"
-                          onClick={() => setCategory(key)}
-                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${category === key
-                            ? "bg-[#4b0102] text-white"
-                            : "bg-[#f1f6ff] text-[#4b0102] dark:bg-white/10"
-                            }`}
-                        >
-                          {cats[key]}
-                        </button>
-                      ))}
-                    </div>
-                    <p className="mt-4 text-xs font-black uppercase text-[#009b5a]">{meta.yearsHeading}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setYear("all")}
-                        className={`rounded-full px-3 py-1.5 text-xs font-bold ${year === "all" ? "bg-[#009b5a] text-white" : "bg-[#e9f7f0] text-[#113927]"
-                          }`}
-                      >
-                        {meta.filterAll}
-                      </button>
-                      {portfolioYears.map((y) => (
-                        <button
-                          key={y}
-                          type="button"
-                          onClick={() => setYear(String(y))}
-                          className={`rounded-full px-3 py-1.5 text-xs font-bold ${year === String(y)
-                            ? "bg-[#009b5a] text-white"
-                            : "bg-[#e9f7f0] text-[#113927] dark:bg-white/10 dark:text-white"
-                            }`}
-                        >
-                          {y}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Empty state */}
-              {filtered.length === 0 && (
-                <div className="mt-12 rounded-lg border border-dashed border-black/15 bg-[#fbfaf7] p-12 text-center dark:border-white/15 dark:bg-white/5">
-                  <FiGrid className="mx-auto h-10 w-10 text-[#4b0102]/50" />
-                  <p className="mt-4 font-bold text-[#65716d] dark:text-white/60">{meta.empty}</p>
-                </div>
-              )}
-
-              {/* Featured row */}
+          {/* Gallery Body */}
+          {filtered.length === 0 ? (
+            /* Empty State */
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-3xl border border-dashed border-black/10 dark:border-white/10 bg-[#fbfaf7]/50 dark:bg-[#0e1411]/10 p-16 text-center shadow-inner"
+            >
+              <FiGrid className="mx-auto h-12 w-12 text-gray-300 dark:text-white/20 animate-bounce" />
+              <h3 className="mt-4 text-lg font-bold text-gray-800 dark:text-white">{meta.empty}</h3>
+            </motion.div>
+          ) : (
+            <div className="space-y-12">
+              {/* Featured Section */}
               {featured.length > 0 && (
-                <div className="mt-8">
-                  <h2 className="text-sm font-black uppercase text-[#009b5a]">Featured</h2>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-650 dark:bg-red-500 animate-ping" />
+                    <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#4b0102] dark:text-[#62e69f]">
+                      FEATURED MEMORIES
+                    </h2>
+                  </div>
+
+                  <div className="grid gap-6 sm:grid-cols-2">
                     {featured.map((album, i) => (
                       <AlbumCard
                         key={album.id}
@@ -253,75 +133,107 @@ export default function PortfolioPage() {
                 </div>
               )}
 
-              {/* Masonry-style grid */}
+              {/* Standard Grid */}
               {rest.length > 0 && (
-                <div className={`grid gap-4 sm:grid-cols-2 ${featured.length > 0 ? "mt-8" : "mt-8"} xl:grid-cols-3`}>
-                  <AnimatePresence mode="popLayout">
-                    {rest.map((album, i) => (
-                      <AlbumCard
-                        key={album.id}
-                        album={album}
-                        lang={lang}
-                        cats={cats}
-                        meta={meta}
-                        index={i + featured.length}
-                      />
-                    ))}
-                  </AnimatePresence>
+                <div className="space-y-6">
+                  {featured.length > 0 && (
+                    <h2 className="text-xs font-extrabold uppercase tracking-widest text-gray-400 dark:text-white/40">
+                      ALL ALBUMS
+                    </h2>
+                  )}
+
+                  <motion.div
+                    layout
+                    className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                  >
+                    <AnimatePresence mode="popLayout">
+                      {rest.map((album, i) => (
+                        <AlbumCard
+                          key={album.id}
+                          album={album}
+                          lang={lang}
+                          cats={cats}
+                          meta={meta}
+                          index={i + featured.length}
+                        />
+                      ))}
+                    </AnimatePresence>
+                  </motion.div>
                 </div>
               )}
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Video gallery */}
-      <section className="border-t border-black/10 bg-white px-4 py-14 dark:border-white/10 dark:bg-[#111615] sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-sm font-black uppercase text-[#4b0102]">{meta.videoGallery}</p>
-            <h2 className="mt-3 text-3xl font-black text-[#191d1c] dark:text-white sm:text-4xl">
-              {meta.videoTitle}
-            </h2>
-            <p className="mt-4 text-lg font-medium leading-8 text-[#5b6461] dark:text-white/70">
-              {meta.videoText}
-            </p>
-          </div>
-          <div className="relative overflow-hidden rounded-lg bg-[#071c17] p-8 text-white">
-            <div className="relative aspect-video overflow-hidden rounded-lg bg-black/40">
-              <Image
-                src="/images/hero-banner.jpg"
-                alt=""
-                fill
-                className="object-cover opacity-60"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-[#4b0102] text-white shadow-2xl ring-4 ring-white/20">
-                  <FiPlay className="ml-1 h-7 w-7" />
-                </span>
+      {/* Video Gallery Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#fcfbf9] dark:from-[#070b09] dark:to-[#040605] border-t border-black/5 dark:border-white/5 px-4 py-20 sm:px-6">
+        <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none" />
+
+        <div className="mx-auto max-w-6xl mycontainer">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+
+            {/* Video Left Text */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#4b0102]/20 bg-[#4b0102]/5 px-3 py-1 text-xs font-bold text-[#4b0102] dark:border-emerald-500/25 dark:bg-emerald-500/5 dark:text-[#62e69f]">
+                {meta.videoGallery.toUpperCase()}
+              </div>
+              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                {meta.videoTitle}
+              </h2>
+              <p className="text-md font-normal leading-relaxed text-gray-600 dark:text-white/60">
+                {meta.videoText}
+              </p>
+            </div>
+
+            {/* Video Right Visual Card */}
+            <div className="lg:col-span-7">
+              <div className="group relative overflow-hidden rounded-3xl bg-black shadow-2xl transition-all duration-500 border border-black/5 dark:border-white/5">
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <Image
+                    src="/images/hero-banner.jpg"
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+                  {/* Pulsing Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-white dark:bg-[#62e69f] text-black shadow-2xl transition-all duration-300 group-hover:scale-110">
+                      <span className="absolute inset-0 rounded-full bg-white dark:bg-[#62e69f] animate-ping opacity-25" />
+                      <FiPlay className="ml-1.5 h-8 w-8 text-black" />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 text-center text-sm font-bold text-white/95 backdrop-blur-md bg-black/40 py-2.5 px-4 rounded-2xl border border-white/5">
+                  {meta.videoCta}
+                </div>
               </div>
             </div>
-            <p className="mt-5 text-center text-sm font-black text-white/80">{meta.videoCta}</p>
+
           </div>
         </div>
       </section>
 
-      {/* Archive note */}
-      <section className="px-4 pb-16 sm:px-6">
-        <div className="mx-auto max-w-6xl rounded-lg bg-[#f1f6ff] p-6 dark:bg-white/5 sm:p-8">
-          <p className="text-center text-sm font-medium leading-7 text-[#424a48] dark:text-white/70">
+      {/* Archive notes / Quick footer */}
+      <section className="px-4 py-16 sm:px-6 bg-[#fbfbf9] dark:bg-[#040605]">
+        <div className="mx-auto max-w-4xl rounded-3xl bg-white dark:bg-[#0e1411]/40 border border-black/5 dark:border-white/5 p-8 sm:p-12 text-center shadow-xl">
+          <p className="text-sm font-medium leading-relaxed text-gray-600 dark:text-white/60 max-w-2xl mx-auto">
             {meta.archiveNote}
           </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/events/past"
-              className="rounded-full bg-[#4b0102] px-5 py-2.5 text-sm font-black text-white hover:bg-[#3a0101]"
+              className="inline-flex items-center justify-center rounded-full bg-[#4b0102] hover:bg-[#6c151c] px-7 py-3.5 text-sm font-black text-white transition-all hover:scale-105 shadow-lg"
             >
               {lang === "bn" ? "অতীত ইভেন্ট" : "Past events"}
             </Link>
             <Link
               href="/contact"
-              className="rounded-full border border-[#4b0102] px-5 py-2.5 text-sm font-black text-[#4b0102] hover:bg-[#eef5f1] dark:hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full border border-black/10 dark:border-white/10 hover:border-[#4b0102] bg-white dark:bg-transparent px-7 py-3.5 text-sm font-black text-gray-800 dark:text-white hover:text-[#4b0102] dark:hover:text-[#62e69f] transition-all hover:scale-105"
             >
               {lang === "bn" ? "যোগাযোগ" : "Contact us"}
             </Link>
@@ -339,56 +251,67 @@ function AlbumCard({ album, lang, cats, meta, large = false, index }) {
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ delay: index * 0.03, duration: 0.35 }}
-      className={`group overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm transition-shadow hover:shadow-xl dark:border-white/10 dark:bg-white/5 ${large ? "sm:min-h-[320px]" : ""
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ delay: index * 0.04, duration: 0.4 }}
+      className={`group overflow-hidden rounded-3xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#0e1411]/60 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between ${large ? "md:min-h-[360px]" : ""
         }`}
     >
-      <Link href={`/portfolio/${album.id}`} className="block">
-        <div className={`relative overflow-hidden ${large ? "h-64 sm:h-72" : "h-48"}`}>
+      <Link href={`/portfolio/${album.id}`} className="flex flex-col h-full justify-between">
+
+        {/* Cover Image & Badges */}
+        <div className="relative overflow-hidden w-full aspect-[16/10] bg-gray-100 dark:bg-white/[0.02]">
           <Image
             src={album.image || "/images/hero-banner.jpg"}
             alt=""
             fill
             sizes={large ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 1280px) 33vw, 25vw"}
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            style={{ objectPosition: `${(index * 17) % 80 + 10}% center` }}
+            className="object-cover transition-transform duration-[1000ms] group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-          <span
-            className={`absolute left-4 top-4 rounded-full px-3 py-1 text-[0.65rem] font-black text-white ${accent.bg}`}
-          >
-            {cats[album.category]}
-          </span>
-          <span className="absolute right-4 top-4 rounded-full bg-black/40 px-2.5 py-1 text-xs font-bold text-white backdrop-blur-sm">
-            {album.year}
-          </span>
-          <div className="absolute bottom-4 left-4 right-4">
-            <h3 className={`font-black text-white ${large ? "text-xl sm:text-2xl" : "text-lg"}`}>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+
+          {/* Top Badges */}
+          <div className="absolute left-4 top-4 right-4 flex items-center justify-between pointer-events-none">
+            <span
+              className={`rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white backdrop-blur-md bg-opacity-80 shadow-md ${accent.bg}`}
+            >
+              {cats[album.category]}
+            </span>
+            <span className="rounded-full bg-black/50 px-3 py-1 text-xs font-bold text-white backdrop-blur-md border border-white/10 shadow-md">
+              {album.year}
+            </span>
+          </div>
+
+          {/* Bottom Card Title & Location */}
+          <div className="absolute bottom-4 left-4 right-4 text-white">
+            <h3 className={`font-serif font-black text-white leading-tight transition-colors group-hover:text-[#62e69f] ${large ? "text-xl sm:text-2xl" : "text-lg"}`}>
               {title}
             </h3>
-            <p className="mt-1 flex items-center gap-1 text-xs font-bold text-white/75">
-              <FiMapPin className="shrink-0" />
-              {album.location[lang]}
+            <p className="mt-2 flex items-center gap-1.5 text-xs font-bold text-white/75">
+              <FiMapPin className="text-[#62e69f] shrink-0" />
+              <span>{album.location[lang]}</span>
             </p>
           </div>
         </div>
-        <div className="p-4">
-          <p className="line-clamp-2 text-sm font-medium leading-6 text-[#65716d] dark:text-white/65">
+
+        {/* Content details below image */}
+        <div className="p-6 flex-1 flex flex-col justify-between">
+          <p className="line-clamp-2 text-sm font-normal leading-relaxed text-gray-500 dark:text-white/60">
             {album.description[lang]}
           </p>
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-xs font-bold text-[#65716d] dark:text-white/50">
-              <FiImage className="mr-1 inline text-[#4b0102]" />
+
+          <div className="mt-5 pt-4 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-xs font-bold">
+            <span className="text-gray-400 dark:text-white/40 flex items-center gap-1.5">
+              <FiImage className="text-[#4b0102] dark:text-[#62e69f]" />
               {album.photoCount} {meta.photosLabel}
             </span>
-            <span className="text-xs font-black text-[#4b0102] group-hover:underline">
+            <span className="text-[#4b0102] dark:text-[#62e69f] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
               {meta.viewAlbum} →
             </span>
           </div>
         </div>
+
       </Link>
     </motion.article>
   );
