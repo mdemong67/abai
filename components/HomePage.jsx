@@ -49,12 +49,13 @@ export default function HomePage() {
     <PageShell headerTransparent flushTop>
       <Hero slides={slides} t={t} />
       <Service t={t} />
+      <HomeNews language={language} />
+      <Events t={t} />
       <About t={t} />
       <PresidentsStatement language={language} />
       {/* <Services t={t} /> */}
       <Membership t={t} language={language} />
-      <HomeNews language={language} />
-      <Events t={t} />
+
       {/* <ExecutiveCommittee language={language} /> */}
       {/* <QuickLinks language={language} /> */}
       <Contact t={t} language={language} />
@@ -403,7 +404,7 @@ function Events({ t }) {
   ];
 
   return (
-    <section id="events" className="px-4 py-16 sm:px-6 lg:py-20 bg-gray-50/50 dark:bg-[#07111f]/30">
+    <section id="events" className="px-4 py-9 sm:px-6 lg:py-14 bg-gray-50/50 dark:bg-[#07111f]/30">
       <div className="mx-auto mycontainer">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
           <div>
@@ -432,7 +433,7 @@ function Events({ t }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.03] backdrop-blur-md shadow-md dark:shadow-2xl transition-all duration-300 hover:border-[#4b0102]/20 dark:hover:border-emerald-500/20 hover:shadow-xl hover:-translate-y-1.5"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.03] backdrop-blur-md shadow-md dark:shadow-2xl transition-all duration-300 hover:border-[#4b0102]/20 dark:hover:border-emerald-500/20 hover:shadow-xl hover:-translate-y-1.5"
               >
                 <div>
                   <div className="relative h-56 overflow-hidden">
@@ -663,7 +664,7 @@ function HomeNews({ language }) {
   const cardArticles = latestNews.slice(4, 6);
 
   return (
-    <section className="bg-[#fbfbf9] dark:bg-[#090e0c] px-4 py-16 sm:px-6 lg:py-20 border-t border-b border-gray-200 dark:border-gray-800">
+    <section className="bg-[#fbfbf9] dark:bg-[#090e0c] px-4 py-9 sm:px-6 lg:py-14 border-t border-b border-gray-200 dark:border-gray-800">
       <div className="mx-auto mycontainer">
 
         {/* Section Header */}
@@ -685,7 +686,7 @@ function HomeNews({ language }) {
         </div>
 
         {/* 3-Column News Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
 
           {/* Column 1 (Left - Main Story) - Spans 2 columns on large screens */}
           {mainArticle && (
@@ -697,7 +698,7 @@ function HomeNews({ language }) {
                     alt=""
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover transition-all duration-700 group-hover:scale-[1.02]"
+                    className="object-cover transition-all duration-700 group-hover:scale-[1.02] rounded-lg"
                   />
                 </div>
                 <div className="space-y-3">
@@ -727,16 +728,16 @@ function HomeNews({ language }) {
 
           {/* Column 2 (Middle - List) - Spans 1 column */}
           {listArticles.length > 0 && (
-            <div className="md:col-span-1 space-y-6 lg:border-l lg:border-r lg:border-gray-250 lg:dark:border-gray-800 lg:px-6 border-b border-gray-200 dark:border-gray-800 pb-8 lg:border-b-0 lg:pb-0">
+            <div className="md:col-span-1 space-y-5 lg:border-l lg:border-r lg:border-gray-250 lg:dark:border-gray-800 lg:px-6 border-b border-gray-200 dark:border-gray-800 pb-5 lg:border-b-0 lg:pb-0">
               {listArticles.map((article, idx) => {
-                const isFirst = idx === 0;
+                const isFirst = idx === 0 || idx === 1;
                 const title = article.title[lang];
                 const categoryLabel = cats[article.category] || "News";
 
                 if (isFirst) {
                   return (
                     <div key={article.id} className="border-b border-gray-200 dark:border-gray-800 pb-6">
-                      <Link href={`/news/${article.id}`} className="group flex gap-4 items-start">
+                      <Link href={`/news/${article.id}`} className="group flex flex-col-reverse gap-4 items-start">
                         <div className="flex-1 space-y-2">
                           <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-red-650 dark:text-red-455">
                             <span className="h-1.5 w-1.5 rounded-full bg-red-650 dark:bg-red-455"></span>
@@ -746,13 +747,13 @@ function HomeNews({ language }) {
                             {title}
                           </h4>
                         </div>
-                        <div className="relative w-20 h-20 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shrink-0 rounded-sm overflow-hidden">
+                        <div className="relative w-full h-[150px] bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shrink-0 rounded-sm overflow-hidden">
                           <Image
                             src={article.image || "/images/hero-banner.jpg"}
                             alt=""
                             fill
                             sizes="80px"
-                            className="object-cover"
+                            className="object-cover rounded-lg"
                           />
                         </div>
                       </Link>
@@ -792,7 +793,7 @@ function HomeNews({ language }) {
                           alt=""
                           fill
                           sizes="(max-width: 1024px) 100vw, 25vw"
-                          className="object-cover transition-all duration-500"
+                          className="object-cover transition-all duration-500 rounded-lg"
                         />
                       </div>
                       <div className="space-y-1.5">
