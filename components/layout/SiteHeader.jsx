@@ -9,6 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiGlobe, FiMenu, FiMoon, FiSun, FiUser, FiX } from "react-icons/fi";
+import BangladeshFlag from "../ui/BangladeshFlag";
 import NavDropdown from "./NavDropdown";
 
 export default function SiteHeader({ transparent = false }) {
@@ -114,20 +115,25 @@ export default function SiteHeader({ transparent = false }) {
           </div>
         </div>
 
+
         <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={toggleLanguage}
-            className={`inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm font-medium ${iconClass}`}
+            className={`inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm font-medium cursor-pointer ${iconClass}`}
             aria-label="Toggle language"
           >
-            <FiGlobe aria-hidden="true" />
+
+            {
+              t.langLabel == "EN" ? <FiGlobe aria-hidden="true" /> : <BangladeshFlag />
+            }
+
             <span>{t.langLabel}</span>
           </button>
           <button
             type="button"
             onClick={() => setDark(!dark)}
-            className={`grid h-10 w-10 place-items-center rounded-full ${iconClass}`}
+            className={`grid h-10 w-10 place-items-center cursor-pointer rounded-full ${iconClass}`}
             aria-label="Toggle dark mode"
           >
             {dark ? <FiSun /> : <FiMoon />}
